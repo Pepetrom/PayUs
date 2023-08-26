@@ -12,7 +12,7 @@ public class Head : MonoBehaviour
     //Temporario
     public GameObject areaOfEffectAtack;
     private Material effectVisual;
-    // Minerar
+    //Mining
     public Transform miningTrasformPoint;
     public Ore atackTarget;
     public float atackRange = 1, atackDelay = 1;
@@ -20,6 +20,9 @@ public class Head : MonoBehaviour
     //Holding
     public PickableOre oreYouAreHolding;
     private bool holding;
+    //Stamina Food
+    private float stamina=1, food=1, regenCooldown =0;
+    [SerializeField] private float staminaPerHit, foodSpentPerTick, staminaGainedPerTick;
 
     void Start()
     {
@@ -31,15 +34,33 @@ public class Head : MonoBehaviour
     private void Update()
     {
         InputCheck();
+        RegenStamina();
     }
     void FixedUpdate()
     {
         Aim();
     }
 
+    private void RegenStamina()
+    {
+        if(regenCooldown < 1)
+        {
+            regenCooldown += Time.deltaTime;
+        }
+        else
+        {
+            if (stamina < 1 && food > 0)
+            {
+                stamina += staminaGainedPerTick;
+                food -= foodSpentPerTick;
+                regenCooldown = 0;
+                GameManager.Instance.uiManager.UpdateUi(food, stamina);
+            }
+        }   
+    }
     private void InputCheck()
     {
-        if (Input.GetMouseButton(0) && !mining && !holding)
+        if (Input.GetMouseButton(0) && !mining && !holding && stamina > 0)
         {          
             StartCoroutine(DealDamage());
         }
@@ -99,6 +120,8 @@ public class Head : MonoBehaviour
         //cubo muda de cor para indicar q está funcionando, remover com adição de animação
         effectVisual.color = Color.grey;
         //---
+        stamina -= staminaPerHit;
+        GameManager.Instance.uiManager.UpdateUi(food, stamina);
         mining = false;
     }
     private void Aim()
