@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    public PickableOre[] ores = new PickableOre[6];
-    public Transform[] oreSlots = new Transform[6];
+    [SerializeField] private PickableOre[] ores = new PickableOre[6];
+    [SerializeField] private Transform[] oreSlots = new Transform[6];
 
-    private void Store(PickableOre oreToStore, int slot)
-    {
-        RemoveWhatIsNotStored();
-        ores[slot] = oreToStore;
-        oreToStore.PickUp(oreSlots[slot], oreSlots[slot]);
-    }
 
     private void OnTriggerEnter(Collider col)
     {
@@ -31,37 +25,16 @@ public class Storage : MonoBehaviour
                     break;
                 }
             }
-            //if all storage is occupied, the game will try to clean the storage and try to pickup the ore
-            RemoveWhatIsNotStored();
-            TryToStore(col.GetComponent<PickableOre>());
         }
     }
-    private void RemoveWhatIsNotStored()
+    private void Store(PickableOre oreToStore, int slot)
     {
-        Debug.Log("mudança");
-        for (int i = 0; i < ores.Length; ++i)
-        {
-            if (ores[i] != null)
-            {
-                if (!ores[i].stored)
-                {
-                    ores[i] = null;
-                }
-            }
-        }
+        ores[slot] = oreToStore;
+        oreToStore.PickUp(oreSlots[slot], oreSlots[slot],this, slot);
     }
-    private void TryToStore(PickableOre ore)
+    
+    public void NullifyOreInArray(int i)
     {
-        for (int i = 0; i < ores.Length; i++)
-        {
-            if (ores[i] == null)
-            {
-                if (!ore.stored)
-                {
-                    Store(ore, i);
-                }
-                break;
-            }
-        }
+        ores[i] = null;
     }
 }

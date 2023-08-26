@@ -45,12 +45,10 @@ public class Head : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && !mining)
         {
-            //dropar objeto
             if (holding)
             {
                 DropObject();
             }
-            //pegar objeto
             else
             {
                 PickUpObject();
@@ -59,12 +57,9 @@ public class Head : MonoBehaviour
     }
     private void DropObject()
     {
-        oreYouAreHolding.held = false;
-        oreYouAreHolding.stored = false;
         oreYouAreHolding.Drop();
         oreYouAreHolding = null;
         holding = false;
-
     }
     private void PickUpObject()
     {
@@ -75,7 +70,6 @@ public class Head : MonoBehaviour
             if (ore.CompareTag("Pickable"))
             {
                 oreYouAreHolding = ore.GetComponent<PickableOre>();
-                oreYouAreHolding.held = true;
                 oreYouAreHolding.PickUp(transform,miningTrasformPoint);
                 holding = true;
                 break;
@@ -114,11 +108,8 @@ public class Head : MonoBehaviour
         {
             // Calculate the direction
             var direction = position - transform.position;
-
-            // You might want to delete this line.
             // Ignore the height difference.
             direction.y = 0;
-
             // Make the transform look in the direction.
             transform.forward = direction;
         }
@@ -127,7 +118,6 @@ public class Head : MonoBehaviour
     private (bool success, Vector3 position) GetMousePosition()
     {
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
         if (Physics.Raycast(ray, out var hitInfo, 100, groundMask))
         {
             // The Raycast hit something, return with the position.
