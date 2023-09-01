@@ -10,14 +10,23 @@ public class ChangeCursorColor : MonoBehaviour
     private bool isCloseEnough;
     private Camera mainCamera;
     private LayerMask layer;
+    private float delay =0;
     private void Start()
     {
         mainCamera = Camera.main;
     }
     private void FixedUpdate()
     {
-        Raycast();
-        ChangeMouse();
+        if (delay >= 1)
+        {
+            Raycast();
+            ChangeMouse();
+            delay = 0;
+        }
+        else
+        {
+            delay += 0.4f;
+        }
     }
     private void Raycast()
     {

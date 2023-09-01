@@ -986,7 +986,7 @@ GameObject:
   - component: {fileID: 85004793}
   - component: {fileID: 85004792}
   - component: {fileID: 85004791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3160,7 +3160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 240676766}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Item2Place '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9834,8 +9834,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: dc9e49a90774f5f42a52e4a82a2a036c, type: 3}
   - {fileID: 2800000, guid: 3a7af026597adb14bb67d6b7c7478b23, type: 3}
   - {fileID: 2800000, guid: abd916bc157a5da48afe90402e843796, type: 3}
-  - {fileID: 2800000, guid: 3a7af026597adb14bb67d6b7c7478b23, type: 3}
-  - {fileID: 2800000, guid: abd916bc157a5da48afe90402e843796, type: 3}
+  - {fileID: 2800000, guid: 17008a9c31764a546bcaf916b56ea5f0, type: 3}
+  - {fileID: 2800000, guid: 8e50cb579cc9b38419b545514787c75e, type: 3}
   cursorHotspot: {x: 0, y: 0}
 --- !u!1 &744740579
 GameObject:
@@ -16572,7 +16572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1259261444}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Item2Place '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18184,7 +18184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387709687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item3Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21939,7 +21939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657831359}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item3Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24456,7 +24456,7 @@ GameObject:
   - component: {fileID: 1842030901}
   - component: {fileID: 1842030900}
   - component: {fileID: 1842030899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27122,7 +27122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2025976358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item1Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27597,7 +27597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2033991670}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item1Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
