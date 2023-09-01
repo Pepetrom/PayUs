@@ -6,10 +6,14 @@ using UnityEngine.UIElements;
 
 public class PickableOre : MonoBehaviour
 {
-    private int id;
-    private Rigidbody rb;
+    [SerializeField]private int id, arrayPosition;
+    [SerializeField] private Rigidbody rb;
     public bool stored;
     public Collider boxCollider;
+    public int Id
+    {
+        get { return id; }
+    }
     [SerializeField]private Storage actualStorage;
     private void Start()
     {
@@ -27,7 +31,7 @@ public class PickableOre : MonoBehaviour
         //check and liberate space in storage
         if (actualStorage != null)
         {
-            actualStorage.NullifyOreInArray(id);
+            actualStorage.NullifyOreInArray(arrayPosition);
             actualStorage = null;
         }
     }
@@ -37,11 +41,12 @@ public class PickableOre : MonoBehaviour
         transform.SetParent(owner.transform, true);
         transform.position = position.transform.position;
         transform.rotation = position.transform.rotation;
+        transform.localScale = Vector3.one;
         rb.isKinematic = true;
         boxCollider.isTrigger = true;
         //these are needed to remove the reference from storage
         actualStorage = storage;
-        id = idForStorage;
+        arrayPosition = idForStorage;
     }
     public void Drop()
     {
@@ -50,5 +55,16 @@ public class PickableOre : MonoBehaviour
         rb.isKinematic = false;
         boxCollider.isTrigger = false;
         transform.localScale = Vector3.one;
+    }
+    public void Launch(float power)
+    {
+        Debug.Log("lancoiu");
+        Drop();
+        rb.AddForce(GameManager.Instance.playerHead.transform.forward *power * 10, ForceMode.VelocityChange);
+    }
+    public void Die()
+    {
+        Drop();
+        Destroy(gameObject);
     }
 }

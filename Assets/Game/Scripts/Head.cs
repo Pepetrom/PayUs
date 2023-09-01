@@ -3,26 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Head : MonoBehaviour
 {
     [SerializeField] private LayerMask groundMask;
     private Camera mainCamera;
-    public GameObject head;
+    [SerializeField] GameObject head;
     //Temporario
     public GameObject areaOfEffectAtack;
     private Material effectVisual;
+    //Movimento
+    public bool canMove = true;
     //Mining
-    public Transform miningTrasformPoint;
-    public Ore atackTarget;
-    public float atackRange = 1, atackDelay = 1;
+    [SerializeField] Transform miningTrasformPoint;
+    [SerializeField] Ore atackTarget;
+    [SerializeField] float atackRange = 1, atackDelay = 1;
     private bool mining;
     //Holding
     public PickableOre oreYouAreHolding;
-    private bool holding;
+    private bool holding, justPickedTheItem;
+    //RayCast
+    Vector3 foward = new Vector3(5,0,0);
+    private RaycastHit hit;
+    private Ray ray;
+    [SerializeField] LayerMask layerForRaycast;
+    public bool Holding
+    {
+    get { return holding; }
+    }
+public float power;
     //Stamina Food
-    private float stamina=1, food=1, regenCooldown =0;
-    [SerializeField] private float staminaPerHit, foodSpentPerTick, staminaGainedPerTick;
+    private float stamina = 1, food = 1, regenCooldown = 0;
+    [SerializeField] private float staminaPerHit,staminaPerCraft, foodSpentPerTick, staminaGainedPerTick;
 
     void Start()
     {
@@ -33,17 +46,35 @@ public class Head : MonoBehaviour
     }
     private void Update()
     {
+        if (canMove)
+        {
         InputCheck();
+        }
         RegenStamina();
     }
     void FixedUpdate()
     {
         Aim();
     }
-
+    public void Craft()
+    {      
+        stamina -= staminaPerCraft;
+        canMove = true;
+    }
+    public bool Raycast()
+    {
+        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out hit);
+        if (Vector3.Distance(transform.position, hit.collider.transform.position)< 2)
+        {
+            return true;
+        }
+        return false;
+        
+    }
     private void RegenStamina()
     {
-        if(regenCooldown < 1)
+        if (regenCooldown < 1)
         {
             regenCooldown += Time.deltaTime;
         }
@@ -56,47 +87,92 @@ public class Head : MonoBehaviour
                 regenCooldown = 0;
                 GameManager.Instance.uiManager.UpdateUi(food, stamina);
             }
-        }   
+        }
     }
     private void InputCheck()
     {
         if (Input.GetMouseButton(0) && !mining && !holding && stamina > 0)
-        {          
+        {
             StartCoroutine(DealDamage());
         }
-        if (Input.GetMouseButtonDown(1) && !mining)
+
+        if (Input.GetMouseButtonUp(1))
         {
-            if (holding)
+            if (justPickedTheItem)
             {
-                DropObject();
+                justPickedTheItem = false;
             }
             else
             {
-                PickUpObject();
+                if (power < 0.5f)
+                {
+                    DropObject();
+                }
+                else
+                {
+                    LaunchObject();
+                }
             }
         }
+        if (Input.GetMouseButtonDown(1) && !mining)
+        {
+            if (!holding)
+            {
+                PickUpObject();
+                justPickedTheItem = true;
+            }
+            else
+            {
+                justPickedTheItem = false;
+            }
+        }
+        if (Input.GetMouseButton(1))
+        {
+            if (power < 1)
+            {
+                power += Time.deltaTime;
+            }
+        }
+        else
+        {
+            power = 0;
+        }
     }
-    private void DropObject()
+    private void LaunchObject()
+    {
+        oreYouAreHolding.Launch(power);
+        oreYouAreHolding = null;
+        holding = false;
+    }
+    public void PlaceInStation()
     {
         oreYouAreHolding.Drop();
         oreYouAreHolding = null;
         holding = false;
+        justPickedTheItem = false;
+    }
+    private void DropObject()
+    {
+        if (oreYouAreHolding != null)
+        {
+            oreYouAreHolding.Drop();
+            oreYouAreHolding = null;
+            holding = false;
+        }
     }
     private void PickUpObject()
     {
-        Collider[] ores = Physics.OverlapSphere(miningTrasformPoint.transform.position, atackRange);
-        foreach (Collider ore in ores)
+        if (Raycast())
         {
-            // Verifica se o objeto detectado é um minério
-            if (ore.CompareTag("Pickable"))
+            if (hit.collider.CompareTag("Pickable"))
             {
-                oreYouAreHolding = ore.GetComponent<PickableOre>();
-                oreYouAreHolding.PickUp(transform,miningTrasformPoint);
+                oreYouAreHolding = hit.collider.GetComponent<PickableOre>();
+                oreYouAreHolding.PickUp(transform, miningTrasformPoint);
                 holding = true;
-                break;
             }
         }
     }
+    
 
     private IEnumerator DealDamage()
     {
@@ -104,6 +180,16 @@ public class Head : MonoBehaviour
         effectVisual.color = Color.green;
         //---
         mining = true;
+        if (Raycast())
+        {
+            if (hit.collider.CompareTag("Ore"))
+            {
+                atackTarget = hit.collider.GetComponent<Ore>();
+                atackTarget.takeDamage(1);
+            }
+        }
+
+        /*
         Collider[] ores = Physics.OverlapSphere(miningTrasformPoint.transform.position, atackRange);
         foreach (Collider ore in ores)
         {
@@ -115,6 +201,8 @@ public class Head : MonoBehaviour
                 //break;
             }
         }
+        */
+
         //animator.SetTrigger("Swing");
         yield return new WaitForSeconds(atackDelay);
         //cubo muda de cor para indicar q está funcionando, remover com adição de animação

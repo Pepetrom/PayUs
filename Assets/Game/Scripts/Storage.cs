@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    [SerializeField] private PickableOre[] ores = new PickableOre[6];
-    [SerializeField] private Transform[] oreSlots = new Transform[6];
-
+    [SerializeField] private PickableOre[] oreSlots = new PickableOre[6];
+    [SerializeField] private Transform[] oreTransforms = new Transform[6];
+    public PickableOre[] Ores
+    {
+        get { return oreSlots; }
+        set { oreSlots = value; }
+    }
 
     private void OnTriggerEnter(Collider col)
     {
         Debug.Log("tentandoguardar");
         if (col.CompareTag("Pickable"))
         {
-            for (int i = 0; i < ores.Length; i++)
+            for (int i = 0; i < oreSlots.Length; i++)
             {
-                if (ores[i] == null)
+                if (oreSlots[i] == null)
                 {
                     PickableOre aux = col.GetComponent<PickableOre>();
                     if (!aux.stored)
@@ -29,12 +33,12 @@ public class Storage : MonoBehaviour
     }
     private void Store(PickableOre oreToStore, int slot)
     {
-        ores[slot] = oreToStore;
-        oreToStore.PickUp(oreSlots[slot], oreSlots[slot],this, slot);
+        oreSlots[slot] = oreToStore;
+        oreToStore.PickUp(oreTransforms[slot], oreTransforms[slot],this, slot);
     }
     
     public void NullifyOreInArray(int i)
     {
-        ores[i] = null;
+        oreSlots[i] = null;
     }
 }
