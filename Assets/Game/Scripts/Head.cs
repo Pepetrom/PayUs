@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class Head : MonoBehaviour
 {
     [SerializeField] private LayerMask groundMask;
-    private Camera mainCamera;
     [SerializeField] GameObject head;
+    private Camera mainCamera;
     //Temporario
     public GameObject areaOfEffectAtack;
     private Material effectVisual;
@@ -18,13 +18,12 @@ public class Head : MonoBehaviour
     //Mining
     [SerializeField] Transform miningTrasformPoint;
     [SerializeField] Ore atackTarget;
-    [SerializeField] float atackRange = 1, atackDelay = 1;
+    [SerializeField] float atackDelay = 1;
     private bool mining;
     //Holding
     public PickableOre oreYouAreHolding;
     private bool holding, justPickedTheItem;
     //RayCast
-    Vector3 foward = new Vector3(5,0,0);
     private RaycastHit hit;
     private Ray ray;
     [SerializeField] LayerMask layerForRaycast;

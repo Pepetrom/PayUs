@@ -9776,6 +9776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 744382952}
   - component: {fileID: 744382953}
+  - component: {fileID: 744382954}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9813,6 +9814,29 @@ MonoBehaviour:
   playerBody: {fileID: 0}
   playerHead: {fileID: 0}
   uiManager: {fileID: 0}
+--- !u!114 &744382954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744382951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c407a4918b70e9946b7fed232f5f08ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customCursorTexture:
+  - {fileID: 2800000, guid: 56c1c340d3c69b34fbf12abdd8820f8d, type: 3}
+  - {fileID: 2800000, guid: 0801f59b07b7ac9418158ecc743a8aaa, type: 3}
+  - {fileID: 2800000, guid: afa52d856637081499b5c1dc830709df, type: 3}
+  - {fileID: 2800000, guid: 543fb005f02b4f348b5d5562874f40fb, type: 3}
+  - {fileID: 2800000, guid: dc9e49a90774f5f42a52e4a82a2a036c, type: 3}
+  - {fileID: 2800000, guid: 3a7af026597adb14bb67d6b7c7478b23, type: 3}
+  - {fileID: 2800000, guid: abd916bc157a5da48afe90402e843796, type: 3}
+  - {fileID: 2800000, guid: 3a7af026597adb14bb67d6b7c7478b23, type: 3}
+  - {fileID: 2800000, guid: abd916bc157a5da48afe90402e843796, type: 3}
+  cursorHotspot: {x: 0, y: 0}
 --- !u!1 &744740579
 GameObject:
   m_ObjectHideFlags: 0
@@ -13517,7 +13541,6 @@ MonoBehaviour:
   canMove: 1
   miningTrasformPoint: {fileID: 116393682}
   atackTarget: {fileID: 0}
-  atackRange: 0.5
   atackDelay: 1
   oreYouAreHolding: {fileID: 0}
   layerForRaycast:
@@ -15233,7 +15256,7 @@ GameObject:
   - component: {fileID: 1139287523}
   - component: {fileID: 1139287522}
   - component: {fileID: 1139287528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Carrinho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17305,7 +17328,7 @@ GameObject:
   - component: {fileID: 1340370948}
   - component: {fileID: 1340370947}
   - component: {fileID: 1340370946}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConstructionStationStatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18858,7 +18881,7 @@ GameObject:
   - component: {fileID: 1412018436}
   - component: {fileID: 1412018435}
   - component: {fileID: 1412018442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConstructionStationMoveable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22814,7 +22837,7 @@ GameObject:
   - component: {fileID: 1759108868}
   - component: {fileID: 1759108867}
   - component: {fileID: 1759108866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore (2)
   m_TagString: Ore
   m_Icon: {fileID: 0}
@@ -24128,7 +24151,7 @@ GameObject:
   - component: {fileID: 1826828570}
   - component: {fileID: 1826828569}
   - component: {fileID: 1826828568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore (1)
   m_TagString: Ore
   m_Icon: {fileID: 0}
@@ -27233,7 +27256,7 @@ GameObject:
   - component: {fileID: 2026533127}
   - component: {fileID: 2026533131}
   - component: {fileID: 2026533133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CraftStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29732,7 +29755,7 @@ GameObject:
   - component: {fileID: 2129259674}
   - component: {fileID: 2129259673}
   - component: {fileID: 2129259672}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ore
   m_TagString: Ore
   m_Icon: {fileID: 0}
@@ -30083,7 +30106,7 @@ PrefabInstance:
     - target: {fileID: 5080068734701121663, guid: 2a94920c56d81784593d1f0d70f49c6c,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6010730057234979082, guid: 2a94920c56d81784593d1f0d70f49c6c,
         type: 3}
