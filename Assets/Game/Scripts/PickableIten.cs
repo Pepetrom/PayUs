@@ -4,21 +4,21 @@ using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 using UnityEngine.UIElements;
 
-public class PickableOre : MonoBehaviour
+public class PickableIten : MonoBehaviour
 {
-    [SerializeField]private int id, arrayPosition;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private int _id, _arrayPosition;
+    [SerializeField] private Rigidbody _rb;
     public bool stored;
     public Collider boxCollider;
     public int Id
     {
-        get { return id; }
+        get { return _id; }
     }
-    [SerializeField]private Storage actualStorage;
+    [SerializeField] private Storage _storageItenIsIn;
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        boxCollider = rb.GetComponent<Collider>();
+        _rb = GetComponent<Rigidbody>();
+        boxCollider = _rb.GetComponent<Collider>();
     }
     public void PickUp(Transform owner, Transform position)
     {
@@ -26,13 +26,13 @@ public class PickableOre : MonoBehaviour
         transform.SetParent(owner.transform,true);
         transform.position = position.transform.position;
         transform.rotation = position.transform.rotation;
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
         boxCollider.isTrigger = true;
         //check and liberate space in storage
-        if (actualStorage != null)
+        if (_storageItenIsIn != null)
         {
-            actualStorage.NullifyOreInArray(arrayPosition);
-            actualStorage = null;
+            _storageItenIsIn.NullifyOreInArray(_arrayPosition);
+            _storageItenIsIn = null;
         }
     }
     public void PickUp(Transform owner, Transform position, Storage storage, int idForStorage)
@@ -42,17 +42,17 @@ public class PickableOre : MonoBehaviour
         transform.position = position.transform.position;
         transform.rotation = position.transform.rotation;
         transform.localScale = Vector3.one;
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
         boxCollider.isTrigger = true;
         //these are needed to remove the reference from storage
-        actualStorage = storage;
-        arrayPosition = idForStorage;
+        _storageItenIsIn = storage;
+        _arrayPosition = idForStorage;
     }
     public void Drop()
     {
         stored = false;
         transform.parent = null;
-        rb.isKinematic = false;
+        _rb.isKinematic = false;
         boxCollider.isTrigger = false;
         transform.localScale = Vector3.one;
     }
@@ -60,7 +60,7 @@ public class PickableOre : MonoBehaviour
     {
         Debug.Log("lancoiu");
         Drop();
-        rb.AddForce(GameManager.Instance.playerHead.transform.forward *power * 10, ForceMode.VelocityChange);
+        _rb.AddForce(GameManager.instance.playerLogic.transform.forward *power * 10, ForceMode.VelocityChange);
     }
     public void Die()
     {

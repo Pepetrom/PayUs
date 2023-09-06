@@ -35,13 +35,12 @@ public class ChangeCursorColor : MonoBehaviour
     }
     public void ChangeMouse()
     {
-        Cursor.SetCursor(customCursorTexture[textureID()], cursorHotspot, CursorMode.Auto);
-        Debug.Log(isCloseEnough);
+        Cursor.SetCursor(customCursorTexture[textureID()], cursorHotspot, CursorMode.Auto);        
     }
     private int textureID()
     {
         layer = hit.collider.gameObject.layer;
-        if (Vector3.Distance(GameManager.Instance.playerHead.transform.position, hit.collider.transform.position) < GameManager.Instance.playerHead.atackRange)
+        if (Vector3.Distance(GameManager.instance.playerLogic.transform.position, hit.collider.transform.position) < GameManager.instance.playerLogic.atackRange)
         {
             isCloseEnough = true;
         }

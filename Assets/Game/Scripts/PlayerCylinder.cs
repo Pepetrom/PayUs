@@ -12,7 +12,7 @@ public class PlayerCylinder : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        GameManager.Instance.playerBody = this;
+        GameManager.instance.playerMovement = this;
     }
     private void FixedUpdate()
     {

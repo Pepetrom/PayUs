@@ -12,9 +12,9 @@ public class UiManager : MonoBehaviour
     Vector2 vector150 = new Vector2(150, 150), vector100 = new Vector2(100, 100);
     private void Start()
     {
-        GameManager.Instance.uiManager = this;
+        GameManager.instance.uiManager = this;
     }
-    public void UpdateHotbar(int whichItemIsOn, int ID)
+    public void UpdateHotbar(int whichItemIsOn)
     {
         
         for(int i = 0; i < itenImage.Length; i++)
@@ -23,7 +23,12 @@ public class UiManager : MonoBehaviour
         }
         
         itenImage[whichItemIsOn].rectTransform.sizeDelta = vector150;
-        //itenImage[whichItemIsOn].sprite = spriteForItem[ID];
+        
+    }
+    public void UpdateSingleItenInHotbar(int whichItemIsOn,int ID)
+    {
+        itenImage[whichItemIsOn].sprite = spriteForItem[ID];
+        UpdateHotbar(whichItemIsOn);
     }
     public void UpdateHungerStamina(float food, float energy)
     {

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-    public PlayerCylinder playerBody;
-    public Head playerHead;
+    public static GameManager instance;
+    public PlayerCylinder playerMovement;
+    public PlayerLogic playerLogic;
     public UiManager uiManager;
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(this);
         }
         else

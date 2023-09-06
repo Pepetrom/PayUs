@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 90228051}
   - component: {fileID: 90228050}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ImageItenOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3983,7 +3983,7 @@ GameObject:
   - component: {fileID: 327530523}
   - component: {fileID: 327530522}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: ImageItenFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5977,7 +5977,9 @@ MonoBehaviour:
   - {fileID: 1082892533}
   - {fileID: 327530522}
   - {fileID: 520429312}
-  spriteForItem: []
+  spriteForItem:
+  - {fileID: 21300000, guid: 267a139458ed8424aa71ea7b76711a69, type: 3}
+  - {fileID: 21300000, guid: b28f2064b121ce646b221109a99ab270, type: 3}
   craft: {fileID: 1000461777}
 --- !u!1 &492508680
 GameObject:
@@ -6702,7 +6704,7 @@ GameObject:
   - component: {fileID: 520429313}
   - component: {fileID: 520429312}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: ImageItenFive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9019,7 +9021,7 @@ GameObject:
   - component: {fileID: 651476864}
   - component: {fileID: 651476863}
   - component: {fileID: 651476862}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9832,8 +9834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d85cbcf1bdc0b949b2870779617b7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBody: {fileID: 0}
-  playerHead: {fileID: 0}
+  playerMovement: {fileID: 0}
+  playerLogic: {fileID: 0}
   uiManager: {fileID: 0}
 --- !u!114 &744382954
 MonoBehaviour:
@@ -11145,7 +11147,7 @@ GameObject:
   - component: {fileID: 841338631}
   - component: {fileID: 841338630}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: ImageItenTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13465,7 +13467,7 @@ GameObject:
   - component: {fileID: 991688863}
   - component: {fileID: 991688862}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Hotbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14290,7 +14292,7 @@ GameObject:
   - component: {fileID: 1082892534}
   - component: {fileID: 1082892533}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: ImageItenThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15315,7 +15317,7 @@ GameObject:
   - component: {fileID: 1139287523}
   - component: {fileID: 1139287522}
   - component: {fileID: 1139287528}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Carrinho
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15334,14 +15336,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb919f1c35dd2c14e97c71ef132d2d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oreSlots:
+  _slots:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  oreTransforms:
+  _slotTransforms:
   - {fileID: 920976674}
   - {fileID: 350526886}
   - {fileID: 499596523}
@@ -15356,11 +15358,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139287521}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1.5}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 2, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1139287527
 Transform:
   m_ObjectHideFlags: 0
@@ -17422,10 +17424,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb919f1c35dd2c14e97c71ef132d2d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oreSlots:
+  _slots:
   - {fileID: 0}
-  oreTransforms:
-  - {fileID: 2025976358}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _slotTransforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &1340370948
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18975,10 +18987,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb919f1c35dd2c14e97c71ef132d2d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oreSlots:
+  _slots:
   - {fileID: 0}
-  oreTransforms:
-  - {fileID: 2033991670}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _slotTransforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &1412018437
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23335,6 +23357,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766331519}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1768631779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768631780}
+  m_Layer: 0
+  m_Name: Mapa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1768631780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768631779}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 441.18857, y: 184.93051, z: -60.33896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1769484208
 GameObject:
   m_ObjectHideFlags: 0
@@ -27561,15 +27614,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8682c57c0c86f7d41b8ba710d540ece5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itens:
-  - {fileID: 5080068734701121663, guid: 630973b30e7506943b315b42c7da13bf, type: 3}
-  ids: 
-  sign: {fileID: 841382105}
-  effect: {fileID: 651476861}
-  item: {fileID: 0}
-  place: {fileID: 125127644}
-  itemPlace: {fileID: 1545441563}
-  itemStorage: {fileID: 2026533133}
+  _itens: []
+  _ids: 
+  _sign: {fileID: 841382105}
+  _effect: {fileID: 651476861}
+  _item: {fileID: 0}
+  _place: {fileID: 125127644}
+  _itemPlace: {fileID: 1545441563}
+  _itemStorage: {fileID: 2026533133}
 --- !u!65 &2026533132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27595,9 +27647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb919f1c35dd2c14e97c71ef132d2d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oreSlots:
+  _slots:
   - {fileID: 0}
-  oreTransforms:
+  _slotTransforms:
   - {fileID: 1545441563}
 --- !u!1 &2028809218
 GameObject:
@@ -30399,12 +30451,27 @@ PrefabInstance:
     - target: {fileID: 6778745320494795270, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
         type: 3}
       propertyPath: atackRange
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6778745320494795270, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
         type: 3}
       propertyPath: hotbarSize
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778745320494795270, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
+        type: 3}
+      propertyPath: _hotbarSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778745320494795270, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
+        type: 3}
+      propertyPath: itensInHotbar.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778745320734478847, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6778745320833359513, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
         type: 3}

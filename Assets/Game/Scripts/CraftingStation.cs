@@ -5,33 +5,33 @@ using UnityEngine;
 
 public class CraftingStation : MonoBehaviour
 {
-    [SerializeField] private GameObject[] itens;
-    [SerializeField] private int[] ids;
-    [SerializeField] private GameObject sign, effect;
-    [SerializeField] private PickableOre item;
-    [SerializeField] private Transform place, itemPlace;
-    [SerializeField] private Storage itemStorage;
-    private float progress;
-    private bool isCrafting;
+    [SerializeField] private GameObject[] _itens;
+    [SerializeField] private int[] _ids;
+    [SerializeField] private GameObject _sign, _effect;
+    [SerializeField] private PickableIten _item;
+    [SerializeField] private Transform _place, _itemPlace;
+    [SerializeField] private Storage _itemStorage;
+    private float _progress;
+    private bool _isCrafting;
 
     private void Start()
     {
-        itemStorage = GetComponent<Storage>();
+        _itemStorage = GetComponent<Storage>();
     }
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            sign.SetActive(true);
+            _sign.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            sign.SetActive(false);
-            progress = 0;
-            GameManager.Instance.uiManager.UpdateCraftingBar(0);
+            _sign.SetActive(false);
+            _progress = 0;
+            GameManager.instance.uiManager.UpdateCraftingBar(0);
         }
     }
     private void OnTriggerStay(Collider col)
@@ -46,33 +46,33 @@ public class CraftingStation : MonoBehaviour
     }
     private void HitStart()
     {
-        effect.SetActive(true);
+        _effect.SetActive(true);
     }
     private void HitEnd()
     {
-        effect.SetActive(false);
+        _effect.SetActive(false);
         //Check the progress of the crafting
-        if (progress == 1)
+        if (_progress == 1)
         {
-            item.Die();
-            Instantiate(itens[item.Id], itemPlace.transform.position,itemPlace.transform.rotation);
-            progress = 0;
-            GameManager.Instance.uiManager.UpdateCraftingBar(0);
+            _item.Die();
+            Instantiate(_itens[_item.Id], _itemPlace.transform.position,_itemPlace.transform.rotation);
+            _progress = 0;
+            GameManager.instance.uiManager.UpdateCraftingBar(0);
         }
         else
         {
-            progress += 0.2f;
-            GameManager.Instance.uiManager.UpdateCraftingBar(progress);
+            _progress += 0.2f;
+            GameManager.instance.uiManager.UpdateCraftingBar(_progress);
         }
     }
     public void StartCraft()
     {
-        item = itemStorage.Ores[0];
-        if (item != null && !isCrafting)
+        _item = _itemStorage.Itens[0];
+        if (_item != null && !_isCrafting)
         {
             try
             {
-                if (itens[item.Id] != null)
+                if (_itens[_item.Id] != null)
                 {
                     StartCoroutine(Crafting());
                 }
@@ -87,12 +87,12 @@ public class CraftingStation : MonoBehaviour
     }
     private IEnumerator Crafting()
     {
-        isCrafting = true;
-        GameManager.Instance.playerHead.canMove = false;
+        _isCrafting = true;
+        GameManager.instance.playerLogic.canMove = false;
         HitStart();
         yield return new WaitForSeconds(0.5f);
         HitEnd();
-        GameManager.Instance.playerHead.Craft();
-        isCrafting = false;
+        GameManager.instance.playerLogic.Craft();
+        _isCrafting = false;
     }
 }

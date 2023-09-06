@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    [SerializeField] private PickableOre[] oreSlots = new PickableOre[6];
-    [SerializeField] private Transform[] oreTransforms = new Transform[6];
-    public PickableOre[] Ores
+    [SerializeField] private PickableIten[] _slots = new PickableIten[6];
+    [SerializeField] private Transform[] _slotTransforms = new Transform[6];
+    public PickableIten[] Itens
     {
-        get { return oreSlots; }
-        set { oreSlots = value; }
+        get { return _slots; }
+        set { _slots = value; }
     }
 
     private void OnTriggerEnter(Collider col)
@@ -17,11 +17,11 @@ public class Storage : MonoBehaviour
         Debug.Log("tentandoguardar");
         if (col.CompareTag("Pickable"))
         {
-            for (int i = 0; i < oreSlots.Length; i++)
+            for (int i = 0; i < _slots.Length; i++)
             {
-                if (oreSlots[i] == null)
+                if (_slots[i] == null)
                 {
-                    PickableOre aux = col.GetComponent<PickableOre>();
+                    PickableIten aux = col.GetComponent<PickableIten>();
                     if (!aux.stored)
                     {                     
                         Store(aux, i);
@@ -31,14 +31,26 @@ public class Storage : MonoBehaviour
             }
         }
     }
-    private void Store(PickableOre oreToStore, int slot)
+    public void TryStore(PickableIten itenToStore)
     {
-        oreSlots[slot] = oreToStore;
-        oreToStore.PickUp(oreTransforms[slot], oreTransforms[slot],this, slot);
+        Debug.Log("tentandoguardar");
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i] == null)
+            {
+                Store(itenToStore, i);
+                break;
+            }
+        }
+    }
+    private void Store(PickableIten itenToStore, int slot)
+    {
+        _slots[slot] = itenToStore;
+        itenToStore.PickUp(_slotTransforms[slot], _slotTransforms[slot],this, slot);
     }
     
     public void NullifyOreInArray(int i)
     {
-        oreSlots[i] = null;
+        _slots[i] = null;
     }
 }

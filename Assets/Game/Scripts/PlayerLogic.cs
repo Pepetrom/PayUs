@@ -5,14 +5,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Head : MonoBehaviour
+public class PlayerLogic : MonoBehaviour
 {
-    //HotBar
-    [SerializeField] int hotbarSize, actualIten;
-    [SerializeField] GameObject[] itensInHotbar;
     //Misc
     [SerializeField] private LayerMask _groundMask;
-    [SerializeField] GameObject _head;
+    [SerializeField] private GameObject _head;
     private Camera _mainCamera;
     //Temporario
     public GameObject areaOfEffectAtack;
@@ -20,19 +17,22 @@ public class Head : MonoBehaviour
     //Movimento
     public bool canMove = true;
     //Mining
-    [SerializeField] Transform _miningTrasformPoint;
-    [SerializeField] Ore _atackTarget;
-    [SerializeField] float _atackDelay = 1;
+    [SerializeField] private Transform _miningTrasformPoint;
+    [SerializeField] private Ore _atackTarget;
+    [SerializeField] private float _atackDelay = 1;
     public float atackRange;
     private bool _isMining;
+    //HotBar
+    [SerializeField] private int _hotbarSize, _actualIten;
+    [SerializeField] private PickableIten[] itensInHotbar;
     //Holding
-    public PickableOre oreYouAreHolding;
-    private bool _holding, _justPickedTheItem;
+    public PickableIten itenYouAreHolding;
+    private bool _holding, _justPickedTheIten;
     public float throwingPower;
     //RayCast
     private RaycastHit _hit;
     private Ray _ray;
-    [SerializeField] LayerMask _layerForRaycast;
+    [SerializeField] private LayerMask _layerForRaycast;
     //Stamina Food
     private float _stamina = 1, _food = 1, _regenCooldown = 0;
     [SerializeField] private float _staminaPerHit,_staminaPerCraft, _foodSpentPerTick, _staminaGainedPerTick;
@@ -40,7 +40,8 @@ public class Head : MonoBehaviour
     void Start()
     {
         _mainCamera = Camera.main;
-        GameManager.Instance.playerHead = this;
+        GameManager.instance.playerLogic = this;
+        itensInHotbar = new PickableIten[_hotbarSize];
         //Temporario
         _effectVisual = areaOfEffectAtack.GetComponent<Renderer>().material;
     }
@@ -85,7 +86,7 @@ public class Head : MonoBehaviour
                 _stamina += _staminaGainedPerTick;
                 _food -= _foodSpentPerTick;
                 _regenCooldown = 0;
-                GameManager.Instance.uiManager.UpdateHungerStamina(_food, _stamina);
+                GameManager.instance.uiManager.UpdateHungerStamina(_food, _stamina);
             }
         }
     }
@@ -106,9 +107,9 @@ public class Head : MonoBehaviour
             //MouseLeftButton
             if (Input.GetMouseButtonUp(1))
             {
-                if (_justPickedTheItem)
+                if (_justPickedTheIten)
                 {
-                    _justPickedTheItem = false;
+                    _justPickedTheIten = false;
                 }
                 else
                 {
@@ -127,11 +128,11 @@ public class Head : MonoBehaviour
                 if (!_holding)
                 {
                     PickUpObject();
-                    _justPickedTheItem = true;
+                    _justPickedTheIten = true;
                 }
                 else
                 {
-                    _justPickedTheItem = false;
+                    _justPickedTheIten = false;
                 }
             }
             if (Input.GetMouseButton(1))
@@ -149,25 +150,34 @@ public class Head : MonoBehaviour
     }
     private void LaunchObject()
     {
-        oreYouAreHolding.Launch(throwingPower);
-        oreYouAreHolding = null;
+        itenYouAreHolding.Launch(throwingPower);
+        itenYouAreHolding = null;
         _holding = false;
     }
     public void PlaceInStation()
     {
-        oreYouAreHolding.Drop();
-        oreYouAreHolding = null;
+        itenYouAreHolding.Drop();
+        itenYouAreHolding = null;
         _holding = false;
-        _justPickedTheItem = false;
+        _justPickedTheIten = false;
     }
     private void DropObject()
     {
-        if (oreYouAreHolding != null)
+        if (itenYouAreHolding != null)
         {
-            oreYouAreHolding.Drop();
-            oreYouAreHolding = null;
+            GameManager.instance.uiManager.UpdateSingleItenInHotbar(_actualIten, 0);
+            itenYouAreHolding.Drop();
+            if (Raycast())
+            {
+                if (_hit.collider.gameObject.layer == 8)
+                {
+                    _hit.collider.GetComponent<Storage>().TryStore(itenYouAreHolding);
+                }
+            }
+            itenYouAreHolding = null;
+            itensInHotbar[_actualIten] = null;
             _holding = false;
-        }
+        }      
     }
     private void PickUpObject()
     {
@@ -175,33 +185,87 @@ public class Head : MonoBehaviour
         {
             if (_hit.collider.CompareTag("Pickable"))
             {
-                oreYouAreHolding = _hit.collider.GetComponent<PickableOre>();
-                oreYouAreHolding.PickUp(transform, _miningTrasformPoint);
-                _holding = true;
+                if (CheckHotbarSpace(_actualIten))
+                {
+                    itensInHotbar[_actualIten] = _hit.collider.GetComponent<PickableIten>();
+                    itenYouAreHolding = itensInHotbar[_actualIten];
+                    itenYouAreHolding.PickUp(transform, _miningTrasformPoint);
+                    _holding = true;
+                    GameManager.instance.uiManager.UpdateSingleItenInHotbar(_actualIten, itenYouAreHolding.Id+1);
+                }
+            }
+            //This part is here and not in drop because the drop occurs after this, so if you click with a iten in hand in a storage, it will store before trying to drop
+            if (_hit.collider.gameObject.layer == 8)
+            {
+                _hit.collider.GetComponent<Storage>().TryStore(itenYouAreHolding);
             }
         }
     }
+    private bool CheckHotbarSpace(int firstToTest)
+    {
+        if (itensInHotbar[firstToTest] == null)
+        {
+            _actualIten = firstToTest;
+
+            return true;
+        }
+        for (int i = 0; i < itensInHotbar.Length; i++)
+        {
+            if (itensInHotbar[i] == null)
+            {
+                _actualIten = i;
+
+                return true;
+            }
+        }
+        return false;
+    }
     public void MoveSelectionOnHotbar()
     {
-        if (Input.GetAxis("MouseScrollWheel") == 1)
+        if (Input.GetAxis("MouseScrollWheel") == -1)
         {
-            actualIten++;
-            if (actualIten >= hotbarSize)
+            if(itensInHotbar[_actualIten] != null)
             {
-                actualIten = 0;
+            itensInHotbar[_actualIten].gameObject.SetActive(false);
             }
-            GameManager.Instance.uiManager.UpdateHotbar(actualIten, 0);
+            _actualIten++;
+            if (_actualIten >= _hotbarSize)
+            {
+                _actualIten = 0;
+            }
+            if (itensInHotbar[_actualIten] != null)
+            {
+                itensInHotbar[_actualIten].gameObject.SetActive(true);
+            }
+            itenYouAreHolding = itensInHotbar[_actualIten];
+            GameManager.instance.uiManager.UpdateHotbar(_actualIten);
         }
         else
         {
-            actualIten--;
-            if (actualIten < 0)
+            if (itensInHotbar[_actualIten] != null)
             {
-                actualIten = hotbarSize - 1;
+                itensInHotbar[_actualIten].gameObject.SetActive(false);
             }
-            GameManager.Instance.uiManager.UpdateHotbar(actualIten, 0);
+            _actualIten--;
+            if (_actualIten < 0)
+            {
+                _actualIten = _hotbarSize - 1;
+            }
+            if (itensInHotbar[_actualIten] != null)
+            {
+                itensInHotbar[_actualIten].gameObject.SetActive(true);
+            }
+            itenYouAreHolding = itensInHotbar[_actualIten];
+            GameManager.instance.uiManager.UpdateHotbar(_actualIten);
         }
-        Debug.Log(Input.GetAxis("MouseScrollWheel"));
+        if (itensInHotbar[_actualIten] == null)
+        {
+            _holding = false;
+        }
+        else
+        {
+            _holding = true;
+        }
     }
     
 
@@ -225,7 +289,7 @@ public class Head : MonoBehaviour
         _effectVisual.color = Color.grey;
         //---
         _stamina -= _staminaPerHit;
-        GameManager.Instance.uiManager.UpdateHungerStamina(_food, _stamina);
+        GameManager.instance.uiManager.UpdateHungerStamina(_food, _stamina);
         _isMining = false;
     }
     private void Aim()

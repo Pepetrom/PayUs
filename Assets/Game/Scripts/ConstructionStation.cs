@@ -17,7 +17,7 @@ public class ConstructionStation : MonoBehaviour
     {
         storage = GetComponent<Storage>();
         keysUnlocked = new bool[keys.Length];
-        storage.Ores = new PickableOre[keys.Length];
+        storage.Itens = new PickableIten[keys.Length];
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +25,7 @@ public class ConstructionStation : MonoBehaviour
         {
             if (other.CompareTag("Pickable"))
             {
-                PickableOre temp = other.GetComponent<PickableOre>();
+                PickableIten temp = other.GetComponent<PickableIten>();
                 if (!temp.stored)
                 {
                     TestKey();
@@ -35,9 +35,9 @@ public class ConstructionStation : MonoBehaviour
     }
     public void TestKey()
     {
-        for (int i = 0; i < storage.Ores.Length; i++)
+        for (int i = 0; i < storage.Itens.Length; i++)
         {
-            if (storage.Ores[i].Id == keys[i])
+            if (storage.Itens[i].Id == keys[i])
             {
                 keysUnlocked[i] = true;
             }
