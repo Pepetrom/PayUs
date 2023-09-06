@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 6010730057234979082}
   - component: {fileID: 8418643800610886128}
   m_Layer: 9
-  m_Name: Gilberto
+  m_Name: Temp_Bar
   m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

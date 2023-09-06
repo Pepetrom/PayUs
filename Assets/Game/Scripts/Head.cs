@@ -7,41 +7,42 @@ using UnityEngine.EventSystems;
 
 public class Head : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] GameObject head;
-    private Camera mainCamera;
+    //HotBar
+    [SerializeField] int hotbarSize, actualIten;
+    [SerializeField] GameObject[] itensInHotbar;
+    //Misc
+    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] GameObject _head;
+    private Camera _mainCamera;
     //Temporario
     public GameObject areaOfEffectAtack;
-    private Material effectVisual;
+    private Material _effectVisual;
     //Movimento
     public bool canMove = true;
     //Mining
-    [SerializeField] Transform miningTrasformPoint;
-    [SerializeField] Ore atackTarget;
-    [SerializeField] float atackDelay = 1;
-    private bool mining;
+    [SerializeField] Transform _miningTrasformPoint;
+    [SerializeField] Ore _atackTarget;
+    [SerializeField] float _atackDelay = 1;
+    public float atackRange;
+    private bool _isMining;
     //Holding
     public PickableOre oreYouAreHolding;
-    private bool holding, justPickedTheItem;
+    private bool _holding, _justPickedTheItem;
+    public float throwingPower;
     //RayCast
-    private RaycastHit hit;
-    private Ray ray;
-    [SerializeField] LayerMask layerForRaycast;
-    public bool Holding
-    {
-    get { return holding; }
-    }
-public float power;
+    private RaycastHit _hit;
+    private Ray _ray;
+    [SerializeField] LayerMask _layerForRaycast;
     //Stamina Food
-    private float stamina = 1, food = 1, regenCooldown = 0;
-    [SerializeField] private float staminaPerHit,staminaPerCraft, foodSpentPerTick, staminaGainedPerTick;
+    private float _stamina = 1, _food = 1, _regenCooldown = 0;
+    [SerializeField] private float _staminaPerHit,_staminaPerCraft, _foodSpentPerTick, _staminaGainedPerTick;
 
     void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
         GameManager.Instance.playerHead = this;
         //Temporario
-        effectVisual = areaOfEffectAtack.GetComponent<Renderer>().material;
+        _effectVisual = areaOfEffectAtack.GetComponent<Renderer>().material;
     }
     private void Update()
     {
@@ -57,14 +58,14 @@ public float power;
     }
     public void Craft()
     {      
-        stamina -= staminaPerCraft;
+        _stamina -= _staminaPerCraft;
         canMove = true;
     }
     public bool Raycast()
     {
-        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out hit);
-        if (Vector3.Distance(transform.position, hit.collider.transform.position)< 2)
+        _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(_ray, out _hit);
+        if (Vector3.Distance(transform.position, _hit.collider.transform.position)< atackRange)
         {
             return true;
         }
@@ -73,82 +74,91 @@ public float power;
     }
     private void RegenStamina()
     {
-        if (regenCooldown < 1)
+        if (_regenCooldown < 1)
         {
-            regenCooldown += Time.deltaTime;
+            _regenCooldown += Time.deltaTime;
         }
         else
         {
-            if (stamina < 1 && food > 0)
+            if (_stamina < 1 && _food > 0)
             {
-                stamina += staminaGainedPerTick;
-                food -= foodSpentPerTick;
-                regenCooldown = 0;
-                GameManager.Instance.uiManager.UpdateUi(food, stamina);
+                _stamina += _staminaGainedPerTick;
+                _food -= _foodSpentPerTick;
+                _regenCooldown = 0;
+                GameManager.Instance.uiManager.UpdateHungerStamina(_food, _stamina);
             }
         }
     }
     private void InputCheck()
     {
-        if (Input.GetMouseButton(0) && !mining && !holding && stamina > 0)
+        if (!_isMining)
         {
-            StartCoroutine(DealDamage());
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-            if (justPickedTheItem)
+            //MouseScrollWheel
+            if (Input.GetAxis("MouseScrollWheel") != 0)
             {
-                justPickedTheItem = false;
+                MoveSelectionOnHotbar();
             }
-            else
+            //MouseRightButton
+            if (Input.GetMouseButton(0) && !_holding)
             {
-                if (power < 0.5f)
+                StartCoroutine(DealDamage());
+            }
+            //MouseLeftButton
+            if (Input.GetMouseButtonUp(1))
+            {
+                if (_justPickedTheItem)
                 {
-                    DropObject();
+                    _justPickedTheItem = false;
                 }
                 else
                 {
-                    LaunchObject();
+                    if (throwingPower < 0.5f)
+                    {
+                        DropObject();
+                    }
+                    else
+                    {
+                        LaunchObject();
+                    }
                 }
             }
-        }
-        if (Input.GetMouseButtonDown(1) && !mining)
-        {
-            if (!holding)
+            if (Input.GetMouseButtonDown(1))
             {
-                PickUpObject();
-                justPickedTheItem = true;
+                if (!_holding)
+                {
+                    PickUpObject();
+                    _justPickedTheItem = true;
+                }
+                else
+                {
+                    _justPickedTheItem = false;
+                }
+            }
+            if (Input.GetMouseButton(1))
+            {
+                if (throwingPower < 1)
+                {
+                    throwingPower += Time.deltaTime;
+                }
             }
             else
             {
-                justPickedTheItem = false;
+                throwingPower = 0;
             }
-        }
-        if (Input.GetMouseButton(1))
-        {
-            if (power < 1)
-            {
-                power += Time.deltaTime;
-            }
-        }
-        else
-        {
-            power = 0;
         }
     }
     private void LaunchObject()
     {
-        oreYouAreHolding.Launch(power);
+        oreYouAreHolding.Launch(throwingPower);
         oreYouAreHolding = null;
-        holding = false;
+        _holding = false;
     }
     public void PlaceInStation()
     {
         oreYouAreHolding.Drop();
         oreYouAreHolding = null;
-        holding = false;
-        justPickedTheItem = false;
+        _holding = false;
+        _justPickedTheItem = false;
     }
     private void DropObject()
     {
@@ -156,60 +166,67 @@ public float power;
         {
             oreYouAreHolding.Drop();
             oreYouAreHolding = null;
-            holding = false;
+            _holding = false;
         }
     }
     private void PickUpObject()
     {
         if (Raycast())
         {
-            if (hit.collider.CompareTag("Pickable"))
+            if (_hit.collider.CompareTag("Pickable"))
             {
-                oreYouAreHolding = hit.collider.GetComponent<PickableOre>();
-                oreYouAreHolding.PickUp(transform, miningTrasformPoint);
-                holding = true;
+                oreYouAreHolding = _hit.collider.GetComponent<PickableOre>();
+                oreYouAreHolding.PickUp(transform, _miningTrasformPoint);
+                _holding = true;
             }
         }
+    }
+    public void MoveSelectionOnHotbar()
+    {
+        if (Input.GetAxis("MouseScrollWheel") == 1)
+        {
+            actualIten++;
+            if (actualIten >= hotbarSize)
+            {
+                actualIten = 0;
+            }
+            GameManager.Instance.uiManager.UpdateHotbar(actualIten, 0);
+        }
+        else
+        {
+            actualIten--;
+            if (actualIten < 0)
+            {
+                actualIten = hotbarSize - 1;
+            }
+            GameManager.Instance.uiManager.UpdateHotbar(actualIten, 0);
+        }
+        Debug.Log(Input.GetAxis("MouseScrollWheel"));
     }
     
 
     private IEnumerator DealDamage()
     {
         //cubo muda de cor para indicar q está funcionando, remover com adição de animação
-        effectVisual.color = Color.green;
+        _effectVisual.color = Color.green;
         //---
-        mining = true;
+        _isMining = true;
         if (Raycast())
         {
-            if (hit.collider.CompareTag("Ore"))
+            if (_hit.collider.CompareTag("Ore"))
             {
-                atackTarget = hit.collider.GetComponent<Ore>();
-                atackTarget.takeDamage(1);
+                _atackTarget = _hit.collider.GetComponent<Ore>();
+                _atackTarget.takeDamage(1);
             }
         }
-
-        /*
-        Collider[] ores = Physics.OverlapSphere(miningTrasformPoint.transform.position, atackRange);
-        foreach (Collider ore in ores)
-        {
-            // Verifica se o objeto detectado é um minério
-            if (ore.CompareTag("Ore"))
-            {
-                atackTarget = ore.GetComponent<Ore>();
-                atackTarget.takeDamage(1);
-                //break;
-            }
-        }
-        */
-
         //animator.SetTrigger("Swing");
-        yield return new WaitForSeconds(atackDelay);
+        yield return new WaitForSeconds(_atackDelay);
         //cubo muda de cor para indicar q está funcionando, remover com adição de animação
-        effectVisual.color = Color.grey;
+        _effectVisual.color = Color.grey;
         //---
-        stamina -= staminaPerHit;
-        GameManager.Instance.uiManager.UpdateUi(food, stamina);
-        mining = false;
+        _stamina -= _staminaPerHit;
+        GameManager.Instance.uiManager.UpdateHungerStamina(_food, _stamina);
+        _isMining = false;
     }
     private void Aim()
     {
@@ -227,8 +244,8 @@ public float power;
 
     private (bool success, Vector3 position) GetMousePosition()
     {
-        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hitInfo, 100, groundMask))
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hitInfo, 100, _groundMask))
         {
             // The Raycast hit something, return with the position.
             return (success: true, position: hitInfo.point);

@@ -31,7 +31,7 @@ public class CraftingStation : MonoBehaviour
         {
             sign.SetActive(false);
             progress = 0;
-            GameManager.Instance.uiManager.CraftingBar(0);
+            GameManager.Instance.uiManager.UpdateCraftingBar(0);
         }
     }
     private void OnTriggerStay(Collider col)
@@ -57,12 +57,12 @@ public class CraftingStation : MonoBehaviour
             item.Die();
             Instantiate(itens[item.Id], itemPlace.transform.position,itemPlace.transform.rotation);
             progress = 0;
-            GameManager.Instance.uiManager.CraftingBar(0);
+            GameManager.Instance.uiManager.UpdateCraftingBar(0);
         }
         else
         {
             progress += 0.2f;
-            GameManager.Instance.uiManager.CraftingBar(progress);
+            GameManager.Instance.uiManager.UpdateCraftingBar(progress);
         }
     }
     public void StartCraft()

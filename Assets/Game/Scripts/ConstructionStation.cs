@@ -23,9 +23,13 @@ public class ConstructionStation : MonoBehaviour
     {
         if (!opened)
         {
-            if (other.CompareTag("Pickable") && !GameManager.Instance.playerHead.Holding)
+            if (other.CompareTag("Pickable"))
             {
-                TestKey();
+                PickableOre temp = other.GetComponent<PickableOre>();
+                if (!temp.stored)
+                {
+                    TestKey();
+                }
             }
         }
     }

@@ -41,7 +41,7 @@ public class ChangeCursorColor : MonoBehaviour
     private int textureID()
     {
         layer = hit.collider.gameObject.layer;
-        if (Vector3.Distance(GameManager.Instance.playerHead.transform.position, hit.collider.transform.position) < 2)
+        if (Vector3.Distance(GameManager.Instance.playerHead.transform.position, hit.collider.transform.position) < GameManager.Instance.playerHead.atackRange)
         {
             isCloseEnough = true;
         }
