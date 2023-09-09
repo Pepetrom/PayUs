@@ -29,24 +29,6 @@ public class ConstructionStation : MonoBehaviour
             }
         }
     }
-
-    /*
-    private void OnTriggerEnter(Collider col)
-    {
-        Debug.Log("entrou");
-        if (!opened)
-        {
-            if (col.CompareTag("Pickable"))
-            {
-                PickableIten temp = col.GetComponent<PickableIten>();
-                if (!temp.stored)
-                {
-                    TestKey();
-                }
-            }
-        }
-    }*/
-
     public void TestKey()
     {
         for (int i = 0; i < storage.Itens.Length; i++)

@@ -81,12 +81,17 @@ public class CraftingStation : MonoBehaviour
     }
     private IEnumerator Crafting()
     {
+        GameManager.instance.playerLogic.transform.position = _place.transform.position;
         _isCrafting = true;
+        GameManager.instance.playerMovement.canMove = false;
         GameManager.instance.playerLogic.canMove = false;
+        GameManager.instance.playerLogic.Craft();
+        GameManager.instance.playerLogic.transform.LookAt( _place.transform.position );
         HitStart();
         yield return new WaitForSeconds(0.5f);
         HitEnd();
-        GameManager.instance.playerLogic.Craft();
+        GameManager.instance.playerMovement.canMove = true;
+        GameManager.instance.playerLogic.canMove = true;
         _isCrafting = false;
     }
 }

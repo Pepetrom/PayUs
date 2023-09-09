@@ -5,22 +5,26 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
-    Rigidbody rb;
+    public Rigidbody rb;
     Vector3 walkingForce;
     //Movimento
-    public bool canMove;
+    public bool canMove = true;
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         GameManager.instance.playerMovement = this;
+        rb = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
         if (canMove)
         {
-        walkingForce = new Vector3(Input.GetAxis("Horizontal")* speed, rb.velocity.y, Input.GetAxis("Vertical") * speed);
-        //rb.AddForce(walkingForce * speed, ForceMode.VelocityChange);
-        rb.velocity = walkingForce*speed;      
+            walkingForce = new Vector3(Input.GetAxis("Horizontal") * speed, rb.velocity.y, Input.GetAxis("Vertical") * speed);
+            rb.velocity = walkingForce * speed;
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
+        //rb.AddForce(walkingForce * speed, ForceMode.VelocityChange);
     }
 }

@@ -8,13 +8,19 @@ public class PickableIten : MonoBehaviour
 {
     [SerializeField] private int _id, _arrayPosition;
     [SerializeField] private Rigidbody _rb;
+    [SerializeField] private bool isTool;
+    [SerializeField] private Storage _storageItenIsIn;
     public bool stored;
     public Collider boxCollider;
     public int Id
     {
         get { return _id; }
     }
-    [SerializeField] private Storage _storageItenIsIn;
+    public bool IsTool
+    {
+        get { return isTool; }
+    }
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
