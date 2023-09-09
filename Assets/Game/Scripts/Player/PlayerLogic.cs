@@ -26,7 +26,7 @@ public class PlayerLogic : MonoBehaviour
     [SerializeField] private PickableIten[] itensInHotbar;
     //Holding
     public PickableIten itenYouAreHolding;
-    [SerializeField] private bool _holding, _holdingTool;
+    [SerializeField] private bool _holdingTool;
     public float throwingPower;
     //RayCast
     private RaycastHit _hit;
@@ -144,10 +144,10 @@ public class PlayerLogic : MonoBehaviour
     }
     private void NotHoldingAnymore()
     {
-        GameManager.instance.uiManager.UpdateSingleItenInHotbar(_actualIten, 0);
+        GameManager.instance.uiManager.UpdatItenSpriteInHotbar(_actualIten, 0);
+        GameManager.instance.uiManager.UpdateItenNameInHotbar("");
         itenYouAreHolding = null;
         itensInHotbar[_actualIten] = null;
-        _holding = false;
         _holdingTool = false;
     }
     private void InteractWithObject()
@@ -192,7 +192,6 @@ public class PlayerLogic : MonoBehaviour
                     itensInHotbar[_actualIten] = _hit.collider.GetComponent<PickableIten>();
                     itenYouAreHolding = itensInHotbar[_actualIten];
                     itenYouAreHolding.PickUp(transform, _miningTrasformPoint);
-                    _holding = true;
                     if (itenYouAreHolding.IsTool)
                     {
                         _holdingTool = true;
@@ -201,7 +200,8 @@ public class PlayerLogic : MonoBehaviour
                     {
                         _holdingTool = false;
                     }
-                    GameManager.instance.uiManager.UpdateSingleItenInHotbar(_actualIten, itenYouAreHolding.Id + 1);
+                    GameManager.instance.uiManager.UpdatItenSpriteInHotbar(_actualIten, itenYouAreHolding.id + 1);
+                    GameManager.instance.uiManager.UpdateItenNameInHotbar(itensInHotbar[_actualIten].nameOfIten);
                 }
                 else
                 {
@@ -242,12 +242,6 @@ public class PlayerLogic : MonoBehaviour
             {
                 _actualIten = 0;
             }
-            if (itensInHotbar[_actualIten] != null)
-            {
-                itensInHotbar[_actualIten].gameObject.SetActive(true);
-            }
-            itenYouAreHolding = itensInHotbar[_actualIten];
-            GameManager.instance.uiManager.UpdateHotbar(_actualIten);
         }
         else
         {
@@ -260,22 +254,14 @@ public class PlayerLogic : MonoBehaviour
             {
                 _actualIten = _hotbarSize - 1;
             }
-            if (itensInHotbar[_actualIten] != null)
-            {
-                itensInHotbar[_actualIten].gameObject.SetActive(true);
-
-            }
-            itenYouAreHolding = itensInHotbar[_actualIten];
-            GameManager.instance.uiManager.UpdateHotbar(_actualIten);
         }
-        if (itensInHotbar[_actualIten] == null)
+        //Update Model In Hand and Ui
+        itenYouAreHolding = itensInHotbar[_actualIten];
+        GameManager.instance.uiManager.UpdateHotbarItenSizes(_actualIten);
+        if (itensInHotbar[_actualIten] != null)
         {
-            _holding = false;
-            _holdingTool = false;
-        }
-        else
-        {
-            _holding = true;
+            itensInHotbar[_actualIten].gameObject.SetActive(true);
+            GameManager.instance.uiManager.UpdateItenNameInHotbar(itensInHotbar[_actualIten].nameOfIten);
             if (itenYouAreHolding.IsTool)
             {
                 _holdingTool = true;
@@ -285,6 +271,11 @@ public class PlayerLogic : MonoBehaviour
                 _holdingTool = false;
             }
         }
+        else
+        {
+            _holdingTool = false;
+            GameManager.instance.uiManager.UpdateItenNameInHotbar("");
+        }      
     }
 
 

@@ -55,7 +55,7 @@ public class CraftingStation : MonoBehaviour
         if (_progress == 1)
         {
             _item.Die();
-            Instantiate(_itens[_item.Id], _itemPlace.transform.position,_itemPlace.transform.rotation);
+            Instantiate(_itens[_item.id], _itemPlace.transform.position,_itemPlace.transform.rotation);
             _progress = 0;
             GameManager.instance.uiManager.UpdateCraftingBar(0);
         }
@@ -70,9 +70,9 @@ public class CraftingStation : MonoBehaviour
         _item = _itemStorage.Itens[0];
         if (_item != null && !_isCrafting)
         {
-            if (_item.Id < _itens.Length)
+            if (_item.id < _itens.Length)
             {
-                if (_itens[_item.Id] != null)
+                if (_itens[_item.id] != null)
                 {
                     StartCoroutine(Crafting());
                 }

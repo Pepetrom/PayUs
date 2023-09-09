@@ -37,7 +37,7 @@ public class ConstructionStation : MonoBehaviour
             {
                 for(int j = 0; j < keys.Length; j++)
                 {
-                    if (storage.Itens[i].Id == keys[j] && keysUnlocked[j] != true)
+                    if (storage.Itens[i].id == keys[j] && keysUnlocked[j] != true)
                     {
                         keysUnlocked[j] = true;
                         break;

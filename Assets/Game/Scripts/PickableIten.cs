@@ -8,17 +8,22 @@ public class PickableIten : MonoBehaviour
 {
     [SerializeField] private int _id, _arrayPosition;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private bool isTool;
+    [SerializeField] private bool _isTool;
     [SerializeField] private Storage _storageItenIsIn;
+    [SerializeField] private string _name;
     public bool stored;
     public Collider boxCollider;
-    public int Id
+    public int id
     {
         get { return _id; }
     }
+    public string nameOfIten
+    {
+        get { return _name; }
+    }
     public bool IsTool
     {
-        get { return isTool; }
+        get { return _isTool; }
     }
 
     private void Start()
@@ -28,6 +33,7 @@ public class PickableIten : MonoBehaviour
     }
     public void PickUp(Transform owner, Transform position)
     {
+        gameObject.layer = 2;
         stored = true;
         transform.SetParent(owner.transform,true);
         transform.position = position.transform.position;
@@ -56,6 +62,7 @@ public class PickableIten : MonoBehaviour
     }
     public void Drop()
     {
+        gameObject.layer = 9;
         stored = false;
         transform.parent = null;
         _rb.isKinematic = false;

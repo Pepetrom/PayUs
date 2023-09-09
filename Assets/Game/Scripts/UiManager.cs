@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,28 +8,33 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] Slider sliderStamina, sliderFood, sliderCraft;
     [SerializeField] Image[] itenImage;
-    [SerializeField] Sprite[] spriteForItem;
     [SerializeField] GameObject craft;
-    Vector2 vector150 = new Vector2(150, 150), vector100 = new Vector2(100, 100);
+    [SerializeField] Sprite[] spriteForItem;
+    [SerializeField] TMP_Text itenInHotbarName;
+    
+    Vector2 sizeSpriteHotBarHovered = new Vector2(140, 140), sizeSpriteHotBar = new Vector2(100, 100);
     private void Start()
     {
         GameManager.instance.uiManager = this;
     }
-    public void UpdateHotbar(int whichItemIsOn)
+    public void UpdateHotbarItenSizes(int whichItemIsOn)
     {
         
         for(int i = 0; i < itenImage.Length; i++)
         {
-            itenImage[i].rectTransform.sizeDelta = vector100;
+            itenImage[i].rectTransform.sizeDelta = sizeSpriteHotBar;
         }
         
-        itenImage[whichItemIsOn].rectTransform.sizeDelta = vector150;
-        
-    }
-    public void UpdateSingleItenInHotbar(int whichItemIsOn,int ID)
+        itenImage[whichItemIsOn].rectTransform.sizeDelta = sizeSpriteHotBarHovered;
+    }    
+    public void UpdatItenSpriteInHotbar(int whichItemIsOn,int ID)
     {
         itenImage[whichItemIsOn].sprite = spriteForItem[ID];
-        UpdateHotbar(whichItemIsOn);
+        UpdateHotbarItenSizes(whichItemIsOn);        
+    }
+    public void UpdateItenNameInHotbar(string name)
+    {
+        itenInHotbarName.text = name;
     }
     public void UpdateHungerStamina(float food, float energy)
     {
