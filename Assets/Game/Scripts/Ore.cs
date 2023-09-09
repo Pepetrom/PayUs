@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ore : MonoBehaviour
 {
-    public float lifePoints = 3;
-    public GameObject drop;
+    [SerializeField] private float lifePoints = 3;
+    [SerializeField] private GameObject drop;
     public void takeDamage(float damage)
     {
         lifePoints -= damage;

@@ -19,13 +19,25 @@ public class ConstructionStation : MonoBehaviour
         keysUnlocked = new bool[keys.Length];
         storage.Itens = new PickableIten[keys.Length];
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider col)
     {
+        if (col.CompareTag("Player"))
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                TestKey();
+            }
+        }
+    }
+    /*
+    private void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("entrou");
         if (!opened)
         {
-            if (other.CompareTag("Pickable"))
+            if (col.CompareTag("Pickable"))
             {
-                PickableIten temp = other.GetComponent<PickableIten>();
+                PickableIten temp = col.GetComponent<PickableIten>();
                 if (!temp.stored)
                 {
                     TestKey();
@@ -33,13 +45,17 @@ public class ConstructionStation : MonoBehaviour
             }
         }
     }
+    */
     public void TestKey()
     {
         for (int i = 0; i < storage.Itens.Length; i++)
         {
-            if (storage.Itens[i].Id == keys[i])
+            if ((storage.Itens[i] != null))
             {
-                keysUnlocked[i] = true;
+                if (storage.Itens[i].Id == keys[i])
+                {
+                    keysUnlocked[i] = true;
+                }
             }
         }
         CheckUnlocked();

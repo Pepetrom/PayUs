@@ -70,19 +70,13 @@ public class CraftingStation : MonoBehaviour
         _item = _itemStorage.Itens[0];
         if (_item != null && !_isCrafting)
         {
-            try
+            if (_item.Id < _itens.Length)
             {
                 if (_itens[_item.Id] != null)
                 {
                     StartCoroutine(Crafting());
                 }
             }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
-            
         }
     }
     private IEnumerator Crafting()

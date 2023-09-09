@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Storage : MonoBehaviour
 {
-    [SerializeField] private PickableIten[] _slots = new PickableIten[6];
-    [SerializeField] private Transform[] _slotTransforms = new Transform[6];
+    [SerializeField] private PickableIten[] _slots;
+    [SerializeField] private Transform[] _slotTransforms;
+    private void Start()
+    {
+        _slots = new PickableIten[_slotTransforms.Length];
+    }
     public PickableIten[] Itens
     {
         get { return _slots; }

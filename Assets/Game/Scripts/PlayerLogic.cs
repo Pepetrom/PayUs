@@ -9,7 +9,6 @@ public class PlayerLogic : MonoBehaviour
 {
     //Misc
     [SerializeField] private LayerMask _groundMask;
-    [SerializeField] private GameObject _head;
     private Camera _mainCamera;
     //Temporario
     public GameObject areaOfEffectAtack;
@@ -152,6 +151,8 @@ public class PlayerLogic : MonoBehaviour
     {
         itenYouAreHolding.Launch(throwingPower);
         itenYouAreHolding = null;
+        itensInHotbar[_actualIten] = null;
+        GameManager.instance.uiManager.UpdateSingleItenInHotbar(_actualIten, 0);
         _holding = false;
     }
     public void PlaceInStation()
@@ -169,7 +170,7 @@ public class PlayerLogic : MonoBehaviour
             itenYouAreHolding.Drop();
             if (Raycast())
             {
-                if (_hit.collider.gameObject.layer == 8)
+                if (_hit.collider.gameObject.layer == 8 || _hit.collider.gameObject.layer == 7)
                 {
                     _hit.collider.GetComponent<Storage>().TryStore(itenYouAreHolding);
                 }
@@ -193,12 +194,7 @@ public class PlayerLogic : MonoBehaviour
                     _holding = true;
                     GameManager.instance.uiManager.UpdateSingleItenInHotbar(_actualIten, itenYouAreHolding.Id+1);
                 }
-            }
-            //This part is here and not in drop because the drop occurs after this, so if you click with a iten in hand in a storage, it will store before trying to drop
-            if (_hit.collider.gameObject.layer == 8)
-            {
-                _hit.collider.GetComponent<Storage>().TryStore(itenYouAreHolding);
-            }
+            }           
         }
     }
     private bool CheckHotbarSpace(int firstToTest)
