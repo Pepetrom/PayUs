@@ -290,6 +290,7 @@ public class PlayerLogic : MonoBehaviour
     }
     private void Aim()
     {
+        
         var (success, position) = GetMousePosition();
         if (success)
         {

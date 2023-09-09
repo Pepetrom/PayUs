@@ -2462,7 +2462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storage: {fileID: 1340370947}
-  keys: 000000000000000000000000
+  keys: 010000000000000000000000
   keysUnlocked: 
   door: {fileID: 1395365865}
 --- !u!114 &1340370947

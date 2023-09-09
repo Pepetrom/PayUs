@@ -29,6 +29,7 @@ public class ConstructionStation : MonoBehaviour
             }
         }
     }
+
     /*
     private void OnTriggerEnter(Collider col)
     {
@@ -44,18 +45,26 @@ public class ConstructionStation : MonoBehaviour
                 }
             }
         }
-    }
-    */
+    }*/
+
     public void TestKey()
     {
         for (int i = 0; i < storage.Itens.Length; i++)
         {
             if ((storage.Itens[i] != null))
             {
-                if (storage.Itens[i].Id == keys[i])
+                for(int j = 0; j < keys.Length; j++)
                 {
-                    keysUnlocked[i] = true;
+                    if (storage.Itens[i].Id == keys[j] && keysUnlocked[j] != true)
+                    {
+                        keysUnlocked[j] = true;
+                        break;
+                    }
                 }
+            }
+            else
+            {
+                keysUnlocked[i] = false;
             }
         }
         CheckUnlocked();
