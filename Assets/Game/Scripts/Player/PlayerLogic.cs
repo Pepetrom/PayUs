@@ -24,7 +24,7 @@ public class PlayerLogic : MonoBehaviour
     //HotBar
     [SerializeField] private int _hotbarSize, _actualIten;
     [SerializeField] private PickableIten[] itensInHotbar;
-    //Holding
+    //Holding and throwing
     public PickableIten itenYouAreHolding;
     [SerializeField] private bool _holdingTool;
     public float throwingPower;
@@ -32,7 +32,7 @@ public class PlayerLogic : MonoBehaviour
     private RaycastHit _hit;
     private Ray _ray;
     [SerializeField] private LayerMask _layerForRaycast;
-    //Stamina Food
+    //Stamina & Food
     private float _stamina = 1, _food = 1, _regenCooldown = 0;
     [SerializeField] private float _staminaPerHit, _staminaPerCraft, _foodSpentPerTick, _staminaGainedPerTick;
     //Aim
@@ -215,15 +215,15 @@ public class PlayerLogic : MonoBehaviour
         if (itensInHotbar[firstToTest] == null)
         {
             _actualIten = firstToTest;
-
             return true;
         }
         for (int i = 0; i < itensInHotbar.Length; i++)
         {
             if (itensInHotbar[i] == null)
             {
+                //Hide old iten before picking the new
+                itensInHotbar[_actualIten].gameObject.SetActive(false);
                 _actualIten = i;
-
                 return true;
             }
         }
@@ -275,7 +275,7 @@ public class PlayerLogic : MonoBehaviour
         {
             _holdingTool = false;
             GameManager.instance.uiManager.UpdateItenNameInHotbar("");
-        }      
+        }
     }
 
 
