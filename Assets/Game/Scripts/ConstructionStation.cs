@@ -7,7 +7,7 @@ using UnityEngine;
 public class ConstructionStation : MonoBehaviour
 {
     [SerializeField] private Storage storage;
-    [SerializeField] private int[] keys;
+    [SerializeField] private int[] keyCodes;
     [SerializeField] private bool[] keysUnlocked;
     [SerializeField] private GameObject door;
     private int openedKeysCount;
@@ -16,8 +16,8 @@ public class ConstructionStation : MonoBehaviour
     private void Start()
     {
         storage = GetComponent<Storage>();
-        keysUnlocked = new bool[keys.Length];
-        storage.Itens = new PickableIten[keys.Length];
+        keysUnlocked = new bool[keyCodes.Length];
+        storage.Itens = new PickableIten[keyCodes.Length];
     }
     private void OnTriggerStay(Collider col)
     {
@@ -33,14 +33,16 @@ public class ConstructionStation : MonoBehaviour
     {
         for (int i = 0; i < storage.Itens.Length; i++)
         {
-            if ((storage.Itens[i] != null))
+            if (storage.Itens[i] != null)
             {
-                for(int j = 0; j < keys.Length; j++)
+                for(int j = 0; j < keyCodes.Length; j++)
                 {
-                    if (storage.Itens[i].id == keys[j] && keysUnlocked[j] != true)
+                    Debug.Log("checou");
+                    if (keysUnlocked[j] != true && storage.Itens[i].id == keyCodes[j] )
                     {
+                        Debug.Log("aberta");
                         keysUnlocked[j] = true;
-                        break;
+                        //break;
                     }
                 }
             }
@@ -53,14 +55,14 @@ public class ConstructionStation : MonoBehaviour
     }
     public void CheckUnlocked()
     {
-        for (int i = 0; i < keys.Length; i++)
-        {
+        for (int i = 0; i < keyCodes.Length; i++)
+        {           
             if (keysUnlocked[i])
             {
                 openedKeysCount++;
             }
         }
-        if (openedKeysCount == keys.Length)
+        if (openedKeysCount == keyCodes.Length)
         {
             OpenDoor();
         }
