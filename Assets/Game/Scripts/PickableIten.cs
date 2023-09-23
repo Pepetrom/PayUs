@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
-using UnityEngine.UIElements;
 
 public class PickableIten : MonoBehaviour
 {
-    [SerializeField] private int _id, _arrayPosition;
-    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private int _id;
     [SerializeField] private bool _isTool;
-    [SerializeField] private Storage _storageItenIsIn;
     [SerializeField] private string _name;
-    public bool stored;
-    public Collider boxCollider;
+    private int _arrayPosition;
+    private Rigidbody _rb;
+    private Storage _storageItenIsIn;
+    private Collider boxCollider;
+    [HideInInspector]public bool stored;
     public int id
     {
         get { return _id; }

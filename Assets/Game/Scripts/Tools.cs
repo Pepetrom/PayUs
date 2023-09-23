@@ -6,7 +6,6 @@ public class Tools : MonoBehaviour
 {
     [SerializeField] float _power;
     [SerializeField] float _damage;
-    [SerializeField] float _durability;
     [SerializeField] bool _isPickaxe;
     public float power
     {
@@ -15,10 +14,6 @@ public class Tools : MonoBehaviour
     public float damage
     {
         get { return _damage; }
-    }
-    public float durability
-    {
-        get { return _durability; }
     }
     public bool isPickaxe
     {

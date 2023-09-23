@@ -6,9 +6,9 @@ using UnityEngine;
 public class CraftingStation : MonoBehaviour
 {
     [SerializeField] private GameObject[] _itens;
-    [SerializeField] private int[] _ids;
+    //[SerializeField] private int[] _ids;
     [SerializeField] private GameObject _sign, _effect;
-    [SerializeField] private PickableIten _item;
+    private PickableIten _item;
     [SerializeField] private Transform _place, _itemPlace;
     [SerializeField] private Storage _itemStorage;
     private float _progress;
@@ -68,13 +68,16 @@ public class CraftingStation : MonoBehaviour
     public void StartCraft()
     {
         _item = _itemStorage.Itens[0];
-        if (_item != null && !_isCrafting)
+        if (_item.id != 0)
         {
-            if (_item.id < _itens.Length)
+            if (_item != null && !_isCrafting)
             {
-                if (_itens[_item.id] != null)
+                if (_item.id < _itens.Length)
                 {
-                    StartCoroutine(Crafting());
+                    if (_itens[_item.id] != null)
+                    {
+                        StartCoroutine(Crafting());
+                    }
                 }
             }
         }
