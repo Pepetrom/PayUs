@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4105957084584693368}
   - component: {fileID: 6123262730114130453}
   - component: {fileID: 6418973801677735412}
+  - component: {fileID: 7832034522716954072}
   m_Layer: 0
   m_Name: CaveTileSingleWall
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7832034522716954072
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4252659796585075330}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4.3415074, z: 1.1606684}
+  m_Center: {x: 0.00000011920929, y: 2.16347, z: -1.649724}
