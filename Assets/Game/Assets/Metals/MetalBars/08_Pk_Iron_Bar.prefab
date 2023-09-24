@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439baba9bfbfea74badec05f0e8fc7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 8
+  _id: 0
   _isTool: 0
   _name: Iron Bar
   stored: 0
