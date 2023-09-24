@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CraftingStation : MonoBehaviour
 {
+    //Pedir para o professor ajudar a implementar um dicionário ao invés de [] em _itens
     [SerializeField] private GameObject[] _itens;
-    //[SerializeField] private int[] _ids;
     [SerializeField] private GameObject _sign, _effect;
     private PickableIten _item;
     [SerializeField] private Transform _place, _itemPlace;
@@ -54,8 +54,8 @@ public class CraftingStation : MonoBehaviour
         //Check the progress of the crafting
         if (_progress == 1)
         {
-            _item.Die();
             Instantiate(_itens[_item.id], _itemPlace.transform.position,_itemPlace.transform.rotation);
+            _item.Die();
             _progress = 0;
             GameManager.instance.uiManager.UpdateCraftingBar(0);
         }
@@ -68,9 +68,9 @@ public class CraftingStation : MonoBehaviour
     public void StartCraft()
     {
         _item = _itemStorage.Itens[0];
-        if (_item.id != 0)
+        if (_item != null)
         {
-            if (_item != null && !_isCrafting)
+            if (_item.id != 0 && !_isCrafting)
             {
                 if (_item.id < _itens.Length)
                 {
@@ -84,7 +84,7 @@ public class CraftingStation : MonoBehaviour
     }
     private IEnumerator Crafting()
     {
-        GameManager.instance.playerLogic.transform.position = _place.transform.position;
+        //GameManager.instance.playerLogic.transform.position = _place.transform.position;
         _isCrafting = true;
         GameManager.instance.playerMovement.canMove = false;
         GameManager.instance.playerLogic.canMove = false;

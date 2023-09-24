@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructionStation : MonoBehaviour
+public class Assemble : MonoBehaviour
 {
     [SerializeField] private Storage storage;
     [SerializeField] private int[] keyCodes;
