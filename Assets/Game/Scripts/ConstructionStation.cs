@@ -7,7 +7,6 @@ public class ConstructionStation : MonoBehaviour
     [SerializeField] private bool[] keysUnlocked;
     [SerializeField] private GameObject door;
     private int openedKeysCount;
-    private bool opened;
 
     private void Start()
     {
