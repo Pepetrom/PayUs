@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4259001064082764355}
   - component: {fileID: 6010730057234979082}
   m_Layer: 9
-  m_Name: 13_PK_Ruby_Brute
+  m_Name: PK_Emerald_Brute
   m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439baba9bfbfea74badec05f0e8fc7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0
+  _id: 15
   _isTool: 0
   _name: 
   stored: 0
@@ -80,7 +80,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4f0717c39485614aa474d11a58aaf1d, type: 2}
+  - {fileID: 2100000, guid: aeb5a6e14ff4dad49aaa345da8df3f5e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

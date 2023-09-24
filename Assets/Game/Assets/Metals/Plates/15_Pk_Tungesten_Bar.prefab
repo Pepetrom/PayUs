@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4469095526674471669}
   - component: {fileID: 6229621188777275836}
   m_Layer: 9
-  m_Name: 09_Pk_Tungesten_Bar
+  m_Name: 15_Pk_Tungesten_Bar
   m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4872454761753630921}
-  m_Mesh: {fileID: 2163755474479709354, guid: db8d7deef4de15e4cbafacbdf3912d01, type: 3}
+  m_Mesh: {fileID: 3736213754101489272, guid: db8d7deef4de15e4cbafacbdf3912d01, type: 3}
 --- !u!23 &3120279624210309298
 MeshRenderer:
   m_ObjectHideFlags: 0

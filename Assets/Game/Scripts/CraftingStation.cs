@@ -68,9 +68,9 @@ public class CraftingStation : MonoBehaviour
     public void StartCraft()
     {
         _item = _itemStorage.Itens[0];
-        if (_item.id != 0)
+        if (_item != null)
         {
-            if (_item != null && !_isCrafting)
+            if (_item.id != 0 && !_isCrafting)
             {
                 if (_item.id < _itens.Length)
                 {
@@ -84,12 +84,12 @@ public class CraftingStation : MonoBehaviour
     }
     private IEnumerator Crafting()
     {
-        GameManager.instance.playerLogic.transform.position = _place.transform.position;
+        //GameManager.instance.playerLogic.transform.position = _place.transform.position;
         _isCrafting = true;
         GameManager.instance.playerMovement.canMove = false;
         GameManager.instance.playerLogic.canMove = false;
         GameManager.instance.playerLogic.Craft();
-        GameManager.instance.playerLogic.transform.LookAt( _place.transform.position );
+        //GameManager.instance.playerLogic.transform.LookAt( _place.transform.position );
         HitStart();
         yield return new WaitForSeconds(0.5f);
         HitEnd();
