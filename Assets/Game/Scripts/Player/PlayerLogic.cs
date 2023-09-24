@@ -200,7 +200,7 @@ public class PlayerLogic : MonoBehaviour
                     {
                         _holdingTool = false;
                     }
-                    GameManager.instance.uiManager.UpdatItenSpriteInHotbar(_actualIten, itenYouAreHolding.id + 1);
+                    GameManager.instance.uiManager.UpdatItenSpriteInHotbar(_actualIten, itenYouAreHolding.id);
                     GameManager.instance.uiManager.UpdateItenNameInHotbar(itensInHotbar[_actualIten].nameOfIten);
                 }
                 else

@@ -8,12 +8,12 @@ public class ChangeCursorColor : MonoBehaviour
     private RaycastHit hit;
     private Ray ray;
     private bool isCloseEnough;
-    private Camera mainCamera;
+    [SerializeField]private Camera mainCamera;
     private LayerMask layer;
     private float delay =0;
     private void Start()
     {
-        mainCamera = Camera.main;
+        //mainCamera = Camera.main;
     }
     private void FixedUpdate()
     {
