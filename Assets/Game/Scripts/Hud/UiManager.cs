@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField] Slider sliderStamina, sliderFood, sliderCraft;
+    [SerializeField] Slider sliderStamina, sliderOxigen, sliderCraft;
     [SerializeField] Image[] itenImage;
     [SerializeField] GameObject craft;
     [SerializeField] Sprite[] spriteForItem;
@@ -36,10 +36,9 @@ public class UiManager : MonoBehaviour
     {
         itenInHotbarName.text = name;
     }
-    public void UpdateHungerStamina(float food, float energy)
+    public void UpdateStamina(float energy)
     {
         sliderStamina.value = energy;
-        sliderFood.value = food;
     }
     public void UpdateCraftingBar(float craftProgress)
     {

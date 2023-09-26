@@ -5,11 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class TemporaryCollider : MonoBehaviour
 {
+    public bool isCave;
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player") == true)
+        if (collision.gameObject.CompareTag("Player") == true)
         {
-            SceneManager.LoadScene("Cave");
+            GameManager.instance.playerLogic.SaveItens();
+            if (isCave)
+            {
+                SceneManager.LoadScene("Hub");
+            }
+            else
+            {
+                SceneManager.LoadScene("Cave");
+            }
         }
     }
 }

@@ -7,34 +7,34 @@ using UnityEngine.EventSystems;
 
 public class PlayerLogic : MonoBehaviour
 {
-    //Misc
+    [Header("RayCast")]//RayCast
+    private RaycastHit _hit;
+    private Ray _ray;
+    [SerializeField] private LayerMask _layerForRaycast;
     [SerializeField] private LayerMask _groundMask;
     private Camera _mainCamera;
-    //Temporario
+    [Header("Temporary")]//Temporario
     public GameObject areaOfEffectAtack;
     private Material _effectVisual;
-    //Movimento
+    [Header("Movement")]//Movimento
     public bool canMove = true;
-    //Mining
+    [Header("Mining")]//Mining
     [SerializeField] private Transform _miningTrasformPoint;
     [SerializeField] private Ore _atackTarget;
     [SerializeField] private float _atackDelay = 1;
     public float atackRange;
     private bool _isMining;
-    //HotBar
-    [SerializeField] private int _hotbarSize, _actualIten;
-    [SerializeField] private PickableIten[] itensInHotbar;
-    //Holding and throwing
+    //Stamina
+    private float _stamina = 1;
+    [SerializeField] private float _staminaPerHit, _staminaPerCraft;
+    [Header("HotBar")]//HotBar
+    [SerializeField] private int _hotbarSize;
+    [SerializeField] private int _actualIten;
+    [SerializeField] private PickableIten[] itensInHotbar;   
+    [Header("Holding and throwing")]//Holding and throwing
     public PickableIten itenYouAreHolding;
     [SerializeField] private bool _holdingTool;
-    public float throwingPower;
-    //RayCast
-    private RaycastHit _hit;
-    private Ray _ray;
-    [SerializeField] private LayerMask _layerForRaycast;
-    //Stamina & Food
-    private float _stamina = 1, _food = 1, _regenCooldown = 0;
-    [SerializeField] private float _staminaPerHit, _staminaPerCraft, _foodSpentPerTick, _staminaGainedPerTick;
+    public float throwingPower;   
     //Aim
     private Ray ray;
     private RaycastHit hitInfo;
@@ -47,6 +47,14 @@ public class PlayerLogic : MonoBehaviour
         _mainCamera = Camera.main;
         GameManager.instance.playerLogic = this;
         itensInHotbar = new PickableIten[_hotbarSize];
+        try
+        {
+            LoadItens();
+        }
+        catch
+        {
+            Debug.Log("Inventory not yet loaded");
+        }
         //Temporario
         _effectVisual = areaOfEffectAtack.GetComponent<Renderer>().material;
     }
@@ -56,7 +64,6 @@ public class PlayerLogic : MonoBehaviour
         {
             InputCheck();
         }
-        RegenStamina();
     }
     void FixedUpdate()
     {
@@ -80,23 +87,7 @@ public class PlayerLogic : MonoBehaviour
         return false;
 
     }
-    private void RegenStamina()
-    {
-        if (_regenCooldown < 1)
-        {
-            _regenCooldown += Time.deltaTime;
-        }
-        else
-        {
-            if (_stamina < 1 && _food > 0)
-            {
-                _stamina += _staminaGainedPerTick;
-                _food -= _foodSpentPerTick;
-                _regenCooldown = 0;
-                GameManager.instance.uiManager.UpdateHungerStamina(_food, _stamina);
-            }
-        }
-    }
+    
     private void InputCheck()
     {
         if (!_isMining)
@@ -278,7 +269,37 @@ public class PlayerLogic : MonoBehaviour
         }
     }
 
-
+    public void SaveItens()
+    {
+        GameManager.instance.inventory.SavePlayerHotbar(itensInHotbar, _hotbarSize);
+    }
+    public void LoadItens()
+    {
+        GameManager.instance.inventory.LoadPlayerHotbar(itensInHotbar, _hotbarSize);
+    }
+    public void LoaditenStep(PickableIten iten, int index)
+    {
+        if (CheckHotbarSpace(index))
+        {
+            itensInHotbar[_actualIten] = iten;
+            itenYouAreHolding = itensInHotbar[_actualIten];
+            itenYouAreHolding.PickUp(transform, _miningTrasformPoint);
+            if (itenYouAreHolding.IsTool)
+            {
+                _holdingTool = true;
+            }
+            else
+            {
+                _holdingTool = false;
+            }
+            GameManager.instance.uiManager.UpdatItenSpriteInHotbar(_actualIten, itenYouAreHolding.id);
+            GameManager.instance.uiManager.UpdateItenNameInHotbar(itensInHotbar[_actualIten].nameOfIten);
+        }
+        else
+        {
+            Debug.Log("Hotbar is Full");
+        }
+    }
     private IEnumerator DealDamage()
     {
         //cubo muda de cor para indicar q está funcionando, remover com adição de animação
@@ -300,7 +321,7 @@ public class PlayerLogic : MonoBehaviour
         _effectVisual.color = Color.grey;
         //---
         _stamina -= _staminaPerHit;
-        GameManager.instance.uiManager.UpdateHungerStamina(_food, _stamina);
+        GameManager.instance.uiManager.UpdateStamina(_stamina);
         _isMining = false;
     }
     private void Aim()

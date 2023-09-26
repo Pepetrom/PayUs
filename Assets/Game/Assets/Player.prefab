@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c79119b65a9d5643baac5cdb390eaa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerForRaycast:
+    serializedVersion: 2
+    m_Bits: 8
   _groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -236,6 +239,8 @@ MonoBehaviour:
   _atackTarget: {fileID: 0}
   _atackDelay: 1
   atackRange: 3
+  _staminaPerHit: 0.1
+  _staminaPerCraft: 0
   _hotbarSize: 5
   _actualIten: 0
   itensInHotbar:
@@ -247,13 +252,6 @@ MonoBehaviour:
   itenYouAreHolding: {fileID: 0}
   _holdingTool: 0
   throwingPower: 0
-  _layerForRaycast:
-    serializedVersion: 2
-    m_Bits: 8
-  _staminaPerHit: 0.1
-  _staminaPerCraft: 0
-  _foodSpentPerTick: 0
-  _staminaGainedPerTick: 0
 --- !u!136 &1722808965090454265
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -531,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  rb: {fileID: 0}
+  rb: {fileID: 6778745320833359515}
   canMove: 1
 --- !u!54 &6778745320833359515
 Rigidbody:

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public PlayerMovement playerMovement;
     public PlayerLogic playerLogic;
     public UiManager uiManager;
+    public Inventory inventory;
     private void Awake()
     {
         if (instance == null)
