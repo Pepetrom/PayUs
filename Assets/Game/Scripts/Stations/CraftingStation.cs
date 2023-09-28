@@ -7,7 +7,7 @@ public class CraftingStation : MonoBehaviour
 {
     [SerializeField] private GameObject[] _itens;
     //[SerializeField] private int[] _ids;
-    [SerializeField] private GameObject _sign, _effect;
+    [SerializeField] private GameObject _keySignalText, _effect;
     private PickableIten _item;
     [SerializeField] private Transform _place, _itemPlace;
     [SerializeField] private Storage _itemStorage;
@@ -22,14 +22,14 @@ public class CraftingStation : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            _sign.SetActive(true);
+            _keySignalText.SetActive(true);
         }
     }
     private void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            _sign.SetActive(false);
+            _keySignalText.SetActive(false);
             _progress = 0;
             GameManager.instance.uiManager.UpdateCraftingBar(0);
         }

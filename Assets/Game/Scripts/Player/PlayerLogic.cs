@@ -47,14 +47,7 @@ public class PlayerLogic : MonoBehaviour
         _mainCamera = Camera.main;
         GameManager.instance.playerLogic = this;
         itensInHotbar = new PickableIten[_hotbarSize];
-        try
-        {
-            LoadItens();
-        }
-        catch
-        {
-            Debug.Log("Inventory not yet loaded");
-        }
+        LoadItens();
         //Temporario
         _effectVisual = areaOfEffectAtack.GetComponent<Renderer>().material;
     }
@@ -271,14 +264,15 @@ public class PlayerLogic : MonoBehaviour
 
     public void SaveItens()
     {
-        GameManager.instance.inventory.SavePlayerHotbar(itensInHotbar, _hotbarSize);
+        GameManager.instance.SavePlayerHotbar(itensInHotbar, _hotbarSize);
     }
     public void LoadItens()
     {
-        GameManager.instance.inventory.LoadPlayerHotbar(itensInHotbar, _hotbarSize);
+        GameManager.instance.LoadPlayerHotbar(itensInHotbar, _hotbarSize);
     }
     public void LoaditenStep(PickableIten iten, int index)
     {
+        iten = Instantiate(iten, transform.position, transform.rotation).GetComponent<PickableIten>();
         if (CheckHotbarSpace(index))
         {
             itensInHotbar[_actualIten] = iten;

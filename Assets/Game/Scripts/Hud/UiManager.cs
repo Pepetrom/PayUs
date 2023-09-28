@@ -10,12 +10,16 @@ public class UiManager : MonoBehaviour
     [SerializeField] Image[] itenImage;
     [SerializeField] GameObject craft;
     [SerializeField] Sprite[] spriteForItem;
-    [SerializeField] TMP_Text itenInHotbarName;
+    [SerializeField] TMP_Text itenInHotbarName, moneyText;
     
     Vector2 sizeSpriteHotBarHovered = new Vector2(140, 140), sizeSpriteHotBar = new Vector2(100, 100);
     private void Start()
     {
         GameManager.instance.uiManager = this;
+    }
+    public void UpdateMoney()
+    {
+        moneyText.text = $"$ {GameManager.instance.money}";
     }
     public void UpdateHotbarItenSizes(int whichItemIsOn)
     {

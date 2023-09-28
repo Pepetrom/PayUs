@@ -46,5 +46,8 @@ public class SceneController : MonoBehaviour
         isPaused = false;
         pauseMenuUI.SetActive(false);
     }
-
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
 }

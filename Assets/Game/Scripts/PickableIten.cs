@@ -7,8 +7,8 @@ public class PickableIten : MonoBehaviour
     [SerializeField] private string _name;
     private int _arrayPosition;
     private Rigidbody _rb;
-    private Storage _storageItenIsIn;
     private Collider boxCollider;
+    private Storage _storageItenIsIn;
     [HideInInspector]public bool stored;
     public int id
     {
@@ -30,6 +30,11 @@ public class PickableIten : MonoBehaviour
     }
     public void PickUp(Transform owner, Transform position)
     {
+        if( _rb == null)
+        {
+            _rb = GetComponent<Rigidbody>();
+            boxCollider = _rb.GetComponent<Collider>();
+        }
         gameObject.layer = 2;
         stored = true;
         transform.SetParent(owner.transform,true);

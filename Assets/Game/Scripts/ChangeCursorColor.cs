@@ -13,7 +13,7 @@ public class ChangeCursorColor : MonoBehaviour
     private float delay =0;
     private void Start()
     {
-        //mainCamera = Camera.main;
+        mainCamera = Camera.main;
     }
     private void FixedUpdate()
     {

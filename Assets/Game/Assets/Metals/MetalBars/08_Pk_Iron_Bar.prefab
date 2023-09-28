@@ -51,6 +51,9 @@ MonoBehaviour:
   _id: 8
   _isTool: 0
   _name: Iron Bar
+  _rb: {fileID: 1304435874633914441, guid: a9f7ed64de92d7343aac6e9b47b1c3f6, type: 3}
+  boxCollider: {fileID: 8821192980053127936, guid: a9f7ed64de92d7343aac6e9b47b1c3f6,
+    type: 3}
   stored: 0
 --- !u!33 &1564189180531286309
 MeshFilter:

@@ -51,6 +51,8 @@ MonoBehaviour:
   _id: 7
   _isTool: 0
   _name: Copper Bar
+  _rb: {fileID: 1304435874633914441}
+  boxCollider: {fileID: 8821192980053127936}
   stored: 0
 --- !u!33 &4216393182657361384
 MeshFilter:
