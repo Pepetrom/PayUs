@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 23
   _isTool: 0
-  _name: Titanium Bar
+  _name: Titanium Rod
   stored: 0
 --- !u!33 &8901692817251675142
 MeshFilter:

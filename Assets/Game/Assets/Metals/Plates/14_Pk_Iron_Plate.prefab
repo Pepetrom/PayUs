@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 14
   _isTool: 0
-  _name: Iron Bar
+  _name: Iron Plate
   stored: 0
 --- !u!33 &1564189180531286309
 MeshFilter:

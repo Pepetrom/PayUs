@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 16
   _isTool: 0
-  _name: Silver Bar
+  _name: Silver Plate
   stored: 0
 --- !u!33 &1666648449204727290
 MeshFilter:

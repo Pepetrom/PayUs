@@ -104,6 +104,9 @@ public class PlayerLogic : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Q))
             {
+                LaunchObject();
+                throwingPower = 0;
+                /*
                 if (throwingPower < 0.3f)
                 {
                     DropObject();
@@ -111,7 +114,7 @@ public class PlayerLogic : MonoBehaviour
                 else
                 {
                     LaunchObject();
-                }
+                }*/
             }
             if (Input.GetKey(KeyCode.Q))
             {
@@ -120,10 +123,12 @@ public class PlayerLogic : MonoBehaviour
                     throwingPower += Time.deltaTime;
                 }
             }
+            /*
             else
             {
                 throwingPower = 0;
             }
+            */
         }
     }
     private void NotHoldingAnymore()
@@ -309,6 +314,8 @@ public class PlayerLogic : MonoBehaviour
                 _atackTarget.takeDamage(toolCurrentlyInUse.damage, toolCurrentlyInUse.power, toolCurrentlyInUse.isPickaxe);
             }
         }
+        //Game juice
+        GameManager.instance.mainCamera.StartShake(0.2f,0.1f);
         //animator.SetTrigger("Swing");
         yield return new WaitForSeconds(_atackDelay);
         //cubo muda de cor para indicar q está funcionando, remover com adição de animação

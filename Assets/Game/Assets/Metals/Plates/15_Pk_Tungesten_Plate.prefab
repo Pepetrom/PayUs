@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 15
   _isTool: 0
-  _name: Tungsten Bar
+  _name: Tungsten Plate
   stored: 0
 --- !u!33 &9146218970057006109
 MeshFilter:

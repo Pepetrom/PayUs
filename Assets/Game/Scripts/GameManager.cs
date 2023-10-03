@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public PlayerMovement playerMovement;
     public PlayerLogic playerLogic;
     public UiManager uiManager;
+    public CameraShake mainCamera;
     public int money = 0;
     //Player KeepInventory
     [SerializeField] private int[] id = new int[5];
