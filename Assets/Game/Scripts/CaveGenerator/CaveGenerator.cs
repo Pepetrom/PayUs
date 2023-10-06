@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class CaveGenerator : MonoBehaviour
 {
-    [SerializeField] int quadradosCaverna = 23, random, sizeX, sizeY, tileID, x, y;
-    [SerializeField] GameObject[] caveTiles;
+    [SerializeField] int quadradosCaverna = 23, sizeX, sizeY;
     [SerializeField] float tileSize, CaveHeight;
+    int x = 0, y = 0, random =0,  randomX = 0;
+    [SerializeField] GameObject[] caveTiles;
+    Quaternion tentativa = new Quaternion(0,0,0,0);
+    int[] rotationsY = new int[4] {0,90,180,270}, rotationsX = new int[2] {0,180};
     int[,] array;
     int limiar = 1;
     GameObject tileBeingWorkedOn;
@@ -20,8 +23,20 @@ public class CaveGenerator : MonoBehaviour
         {
             for (int j = 0; j < sizeY; j++)
             {
-                tileBeingWorkedOn = Instantiate(caveTiles[array[i, j]], transform);
-                tileBeingWorkedOn.transform.position = new Vector3(transform.position.x + i * tileSize * 1.55f, CaveHeight, transform.position.y + j * tileSize * 1.55f);             
+                if (array[i, j] == 0)
+                {
+
+                }
+                else
+                {
+                    randomX = Random.Range(0, 16);
+                    tileBeingWorkedOn = Instantiate(caveTiles[randomX], transform);
+                    tileBeingWorkedOn.transform.position = new Vector3(transform.position.x + i * tileSize, CaveHeight, transform.position.y + j * tileSize);
+                }
+                /*
+                 tileBeingWorkedOn = Instantiate(caveTiles[array[i, j]], transform);
+                 tileBeingWorkedOn.transform.position = new Vector3(transform.position.x + i * tileSize, CaveHeight, transform.position.y + j * tileSize);
+                */
             }
         }
     }
