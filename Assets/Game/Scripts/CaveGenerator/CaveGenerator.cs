@@ -29,7 +29,7 @@ public class CaveGenerator : MonoBehaviour
                 }
                 else
                 {
-                    randomX = Random.Range(0, 16);
+                    randomX = Random.Range(0, caveTiles.Length);
                     tileBeingWorkedOn = Instantiate(caveTiles[randomX], transform);
                     tileBeingWorkedOn.transform.position = new Vector3(transform.position.x + i * tileSize, CaveHeight, transform.position.y + j * tileSize);
                 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3262578717941473290}
   m_Layer: 0
-  m_Name: CaveFloorTwoGenerator 6
+  m_Name: CaveTileN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

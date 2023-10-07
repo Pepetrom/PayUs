@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5175891512129869736}
   m_Layer: 0
-  m_Name: CaveFloorOneGenerator 1
+  m_Name: CaveTileA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4417095405658497473}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}
@@ -77,12 +77,12 @@ PrefabInstance:
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}
@@ -92,7 +92,7 @@ PrefabInstance:
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5175891512129869736, guid: ccc74dc53e355ab49b936dba22c49b1c,
         type: 3}

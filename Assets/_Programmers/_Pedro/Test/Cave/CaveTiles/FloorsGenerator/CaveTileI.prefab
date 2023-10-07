@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3262578717941473290}
   m_Layer: 0
-  m_Name: CaveFloorTwoGenerator 0
+  m_Name: CaveTileI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ PrefabInstance:
     - target: {fileID: 3262578717941473290, guid: 00e0b8b4565f59b4d9bdb64aaadcfee1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3262578717941473290, guid: 00e0b8b4565f59b4d9bdb64aaadcfee1,
         type: 3}
@@ -72,7 +72,7 @@ PrefabInstance:
     - target: {fileID: 3262578717941473290, guid: 00e0b8b4565f59b4d9bdb64aaadcfee1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3262578717941473290, guid: 00e0b8b4565f59b4d9bdb64aaadcfee1,
         type: 3}
@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 3262578717941473290, guid: 00e0b8b4565f59b4d9bdb64aaadcfee1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3262578717941473290, guid: 00e0b8b4565f59b4d9bdb64aaadcfee1,
         type: 3}
