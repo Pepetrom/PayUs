@@ -80,7 +80,21 @@ public class PlayerLogic : MonoBehaviour
         return false;
 
     }
-    
+    public bool EnterCar(Transform car)
+    {
+        if (canMove)
+        {
+           transform.parent = car.transform;
+           canMove = false;
+           return true;
+        }
+        else
+        {
+            transform.parent = null;
+            canMove = true;
+            return false;
+        }
+    }
     private void InputCheck()
     {
         if (!_isMining)
@@ -106,15 +120,6 @@ public class PlayerLogic : MonoBehaviour
             {
                 LaunchObject();
                 throwingPower = 0;
-                /*
-                if (throwingPower < 0.3f)
-                {
-                    DropObject();
-                }
-                else
-                {
-                    LaunchObject();
-                }*/
             }
             if (Input.GetKey(KeyCode.Q))
             {
@@ -123,12 +128,6 @@ public class PlayerLogic : MonoBehaviour
                     throwingPower += Time.deltaTime;
                 }
             }
-            /*
-            else
-            {
-                throwingPower = 0;
-            }
-            */
         }
     }
     private void NotHoldingAnymore()
