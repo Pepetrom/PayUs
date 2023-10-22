@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject pauseMenu;
+    public GameObject soundPanel;
     
     public PlayerMovement playerMovement;
     public PlayerLogic playerLogic = null;
@@ -48,6 +49,14 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
         }
+    }
+    public void EnableSound()
+    {
+        soundPanel.SetActive(true);
+    }
+    public void DisableSound()
+    {
+        soundPanel.SetActive(false);
     }
     public void Exit()
     {

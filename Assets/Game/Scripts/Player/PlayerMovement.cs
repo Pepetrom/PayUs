@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -86,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
     {
         staminaSlider.AddValue(-quantity);
         staminaTimer = 0;
+        if(staminaSlider.value <= 0)
+        {
+            SceneManager.LoadScene("Defeat");
+        }
     }
     public void Jump()
     {
