@@ -114,4 +114,12 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, mouseX, 0);
         }        
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Door") == true)
+        {
+            SceneManager.LoadScene("VillageTemp");
+        }
+    }
 }

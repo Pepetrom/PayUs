@@ -10,6 +10,7 @@ TagManager:
   - Chop
   - Plant
   - Center
+  - Door
   layers:
   - Default
   - TransparentFX

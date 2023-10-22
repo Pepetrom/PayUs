@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        PlayMusic("Water");
         PlayMusic("CaveAmbience");
     }
     public void PlayMusic(string name)
@@ -43,5 +43,21 @@ public class AudioManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(soundIwant.clip);
         }
+    }
+    public void ToggleMusic()
+    {
+        musicSource.mute = !musicSource.mute;
+    }
+    public void ToggleSfx()
+    {
+        sfxSource.mute = !sfxSource.mute;
+    }
+    public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+    public void SfxVolume(float volume)
+    {
+        sfxSource.volume = volume;
     }
 }
