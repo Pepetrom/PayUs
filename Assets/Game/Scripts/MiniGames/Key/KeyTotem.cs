@@ -33,6 +33,8 @@ public class KeyTotem : MonoBehaviour
         if (canInteract && Input.GetKeyDown(KeyCode.F))
         {
             KeyTotemMenu();
+            pressF.SetActive(false);
+            canInteract = false;
         }
     }
 

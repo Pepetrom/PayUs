@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     float moveVertical;
     [SerializeField] float sprintMultiplier;
     Vector3 moveDirection;
-    Vector3 moveLimits;
     //Camera
     public float sensitivity = 2.0f;
     float mouseX;
@@ -37,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
     {
         GameManager.instance.playerMovement = this;
         rb = GetComponent<Rigidbody>();
-        moveLimits = new Vector3(moveSpeed, 10, moveSpeed);
         playerCamera = Camera.main.transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

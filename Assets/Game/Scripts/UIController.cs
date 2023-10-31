@@ -18,7 +18,6 @@ public class UIController : MonoBehaviour
     }
     public void QuitPanel()
     {
-        panel.SetActive(false);
         if (panel.activeSelf)
         {
             if (playerLogic != null)

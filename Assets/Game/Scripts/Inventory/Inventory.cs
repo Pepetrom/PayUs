@@ -13,8 +13,8 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         GameManager.instance.inventory = this;
-        //LoadInventory();
-        //ShowItems();
+        LoadInventory();
+        ShowItems();
         //PlayerPrefs.SetInt("size", 10);
         //PlayerPrefs.DeleteAll();
     }

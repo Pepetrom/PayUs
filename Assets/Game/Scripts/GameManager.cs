@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     public void SceneChange(string Scene)
     {
         Time.timeScale = 1;
+        if (inventory != null)
+        {
+            inventory.SaveFullInventory();
+        }
         SceneManager.LoadScene(Scene);
     }
     public void PauseMenu()

@@ -6840,7 +6840,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155443023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.025, y: 0.86, z: 0.093}
+  m_LocalPosition: {x: 0.002, y: 0.104, z: 0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10365,8 +10365,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2069135237}
         m_TargetAssemblyTypeName: RTSHud, Assembly-CSharp
-        m_MethodName: CompleteMission
-        m_Mode: 3
+        m_MethodName: AddVillager
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12079,7 +12079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1857322176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13180,7 +13180,8 @@ MonoBehaviour:
   - {fileID: 543790669}
   - {fileID: 1598504556}
   - {fileID: 1473195300}
-  money: 0
+  money: 20
+  moneyText: {fileID: 98960479}
   villagerAsset: {fileID: 8512446400620956344, guid: 38ccce925d681dd40ae48f3f1132eede,
     type: 3}
   villagerSpawn: {fileID: 1155443024}
@@ -13232,7 +13233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51ec66caf77ae0488557cbc6e41c4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySize: 10
+  inventorySize: 99
   itemCount: 0
   itemQuantity: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   items:

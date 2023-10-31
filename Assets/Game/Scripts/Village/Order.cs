@@ -10,8 +10,7 @@ public class Order : MonoBehaviour
     bool doing = false, returning;
     public Order next;
     public Type type;
-    bool ended = false;
-    
+
     private void Update()
     {
         if (doing)
@@ -20,7 +19,7 @@ public class Order : MonoBehaviour
             {
                 if (Vector3.Distance(owner.transform.position, objectivePoint) < 2)
                 {
-                   StartCoroutine( Extract());
+                    StartCoroutine(Extract());
                 }
             }
             else

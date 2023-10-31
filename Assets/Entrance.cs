@@ -9,7 +9,9 @@ public class Entrance : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("VillageTemp");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            GameManager.instance.SceneChange("VillageTemp");
         }
     }
 }
