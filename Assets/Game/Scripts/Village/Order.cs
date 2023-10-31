@@ -10,6 +10,7 @@ public class Order : MonoBehaviour
     bool doing = false, returning;
     public Order next;
     public Type type;
+    bool ended = false;
     
     private void Update()
     {
@@ -73,7 +74,7 @@ public class Order : MonoBehaviour
     }
     IEnumerator Extract()
     {        
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
         owner.SetDestination(returnPoint);
         returning = true;
     }
