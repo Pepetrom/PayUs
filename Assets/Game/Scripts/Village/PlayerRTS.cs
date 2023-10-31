@@ -10,7 +10,7 @@ public class PlayerRTS : MonoBehaviour
     Camera _camera;
     RaycastHit _hit;
     Villager actualVillager, selectedVillager;
-    public Vector3[] places = new Vector3[6];
+    public Transform[] places;
     private void Awake()
     {
         _camera = Camera.main;
@@ -37,7 +37,7 @@ public class PlayerRTS : MonoBehaviour
                 {
                     if (selectedVillager != null)
                     {
-                        selectedVillager.Command(places[1],places[0],Type.Food);
+                        selectedVillager.Command(places[1].position,places[0].position, Type.Food);
                         selectedVillager = null;
                     }
                 }
@@ -45,7 +45,7 @@ public class PlayerRTS : MonoBehaviour
                 {
                     if (selectedVillager != null)
                     {
-                        selectedVillager.Command(places[1],places[0], Type.Ore);
+                        selectedVillager.Command(places[2].position, places[0].position, Type.Ore);
                         selectedVillager = null;
                     }
                 }
@@ -53,7 +53,7 @@ public class PlayerRTS : MonoBehaviour
                 {
                     if (selectedVillager != null)
                     {
-                        selectedVillager.Command(places[1],places[0], Type.Wood);
+                        selectedVillager.Command(places[3].position, places[0].position, Type.Wood);
                         selectedVillager = null;
                     }
                 }
@@ -61,7 +61,7 @@ public class PlayerRTS : MonoBehaviour
                 {
                     if (selectedVillager != null)
                     {
-                        selectedVillager.Command(places[0], places[0], Type.None);
+                        selectedVillager.Command(places[0].position, places[0].position, Type.None);
                         selectedVillager = null;
                     }
                 }

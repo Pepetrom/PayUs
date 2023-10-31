@@ -9,16 +9,17 @@ public class Villager : MonoBehaviour
 {
     PlayerRTS playerRTS;
     int professionAtual = 0;
-    public GameObject[] profession = new GameObject[3];
-    public Outline outline;
-    public GameObject[] selectionArrow = new GameObject[3];
+    public GameObject[] profession = new GameObject[4];
+    public GameObject selectionArrow;
     public Order sent, actual;
     public List<Order> orders;
     NavMeshAgent navMesh;
+
+    public GameObject tempSelectArrow;
+
     void Start()
     {
-        outline = profession[professionAtual].GetComponent<Outline>();
-        profession[0].SetActive(true);
+        profession[3].SetActive(true);
         navMesh = GetComponent<NavMeshAgent>();
         playerRTS = PlayerRTS.instance;
         orders.Add(sent);
@@ -27,23 +28,22 @@ public class Villager : MonoBehaviour
     {
         profession[professionAtual].SetActive(false);
         profession[which].SetActive(true);
-        outline = profession[professionAtual].GetComponent<Outline>();
     }
     public void ShowOutline()
     {
-        outline.enabled = true;
+        tempSelectArrow.SetActive(true);
     }
     public void HideOutline()
     {
-        outline.enabled = false;
+        tempSelectArrow.SetActive(false);
     }
     public void Select()
     {
-        selectionArrow[professionAtual].SetActive(true);
+        selectionArrow.SetActive(true);
     }
     public void Deselect()
     {
-        selectionArrow[professionAtual].SetActive(false);
+        selectionArrow.SetActive(false);
     }
     public void Command(Vector3 start, Vector3 end, Type type)
     {

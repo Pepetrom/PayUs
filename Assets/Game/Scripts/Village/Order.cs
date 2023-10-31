@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-public enum Type { Ore,Wood, Food, None}
+public enum Type { Food,Ore,Wood,None}
 public class Order : MonoBehaviour
 {
     public Vector3 returnPoint, objectivePoint;
@@ -33,6 +33,7 @@ public class Order : MonoBehaviour
     }
     public void Started()
     {
+        owner.ChangeProfession((int)type);
         doing = true;
         owner.SetDestination(objectivePoint);
         returning = false;
