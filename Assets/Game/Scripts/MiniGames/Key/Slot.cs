@@ -8,6 +8,8 @@ public class Slot : MonoBehaviour, IDropHandler
     public int slotID;
     public static int itemsInCorrectSlots = 0;
     public GameObject panel;
+    public PlayerLogic playerLogic = null;
+    public GameObject wall;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -22,7 +24,17 @@ public class Slot : MonoBehaviour, IDropHandler
 
             if (itemsInCorrectSlots == 3)
             {
-                panel.SetActive(false);
+                if (panel.activeSelf)
+                {
+                    if (playerLogic != null)
+                    {
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                    }
+                    Time.timeScale = 1;
+                    panel.SetActive(false);
+                }
+                Destroy(wall.gameObject);
             }
         }
     }

@@ -1389,6 +1389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotID: 1
   panel: {fileID: 761566568}
+  playerLogic: {fileID: 707502713}
+  wall: {fileID: 530427327}
 --- !u!1 &308659981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,6 +2409,12 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &530427327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68433e2088f788c45974d10fe70e1787,
+    type: 3}
+  m_PrefabInstance: {fileID: 1873235105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &565400280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,6 +2985,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700260573}
   m_CullTransparentMesh: 1
+--- !u!114 &707502713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6790768664934024054, guid: 992be3f80b0c00a4aa6d7bc3ea3d53cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6790768664708257179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74775599887c74439513a37651a8be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &724755567
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,6 +5586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 761566568}
+  playerLogic: {fileID: 707502713}
 --- !u!65 &1202084839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6487,6 +6508,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotID: 2
   panel: {fileID: 761566568}
+  playerLogic: {fileID: 707502713}
+  wall: {fileID: 530427327}
 --- !u!1 &1527689000
 GameObject:
   m_ObjectHideFlags: 0
@@ -7619,12 +7642,12 @@ PrefabInstance:
     - target: {fileID: 6151983243204953535, guid: 6b141171284acaa429b18334e386d579,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.920469
+      value: 2.33
       objectReference: {fileID: 0}
     - target: {fileID: 6151983243204953535, guid: 6b141171284acaa429b18334e386d579,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 92.22188
+      value: 90.62
       objectReference: {fileID: 0}
     - target: {fileID: 6151983243204953535, guid: 6b141171284acaa429b18334e386d579,
         type: 3}
@@ -9677,6 +9700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotID: 3
   panel: {fileID: 761566568}
+  playerLogic: {fileID: 707502713}
+  wall: {fileID: 530427327}
 --- !u!1 &2068981496
 GameObject:
   m_ObjectHideFlags: 0
