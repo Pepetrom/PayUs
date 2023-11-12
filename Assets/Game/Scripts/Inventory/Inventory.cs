@@ -4,30 +4,23 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    public int inventorySize;
-    public int itemCount = 0;
-    public int[] itemQuantity = new int[9];
-    public GameObject[] items = new GameObject[9];
-    public TextMeshProUGUI[] itemText = new TextMeshProUGUI[9];
+    public int[] itemQuantity = new int[3];
+    public GameObject[] items = new GameObject[3];
+    public TextMeshProUGUI[] itemText = new TextMeshProUGUI[3];
     public bool isMenu = false;
+    
     private void Start()
     {
         GameManager.instance.inventory = this;
         LoadInventory();
         ShowItems();
-        //PlayerPrefs.SetInt("size", 10);
-        //PlayerPrefs.DeleteAll();
     }
     public bool AddItems(int id)
     {
-        if (itemCount < inventorySize)
-        {
-            itemQuantity[id]++;
-            itemCount++;
-            ShowItems();
-            return true;
-        }
-        return false;
+        itemQuantity[id] += GameManager.instance.NPCManager.itemMultiplier[id];
+        ShowItems();
+        SaveFullInventory();
+        return true;
     }
     public void ShowItems()
     {
@@ -54,14 +47,11 @@ public class Inventory : MonoBehaviour
     }
     public void LoadInventory()
     {
-        if (PlayerPrefs.HasKey("size"))
-        {
-            inventorySize = PlayerPrefs.GetInt("size");
-        }
         for (int i = 0; i < itemQuantity.Length; i ++)
         {
-            PlayerPrefs.SetInt(("item" + i), itemQuantity[i]);
+            itemQuantity[i] =  PlayerPrefs.GetInt("item" + i);
         }
+        ShowItems();
     }
     public void SaveFullInventory()
     {
@@ -71,9 +61,9 @@ public class Inventory : MonoBehaviour
         }
         PlayerPrefs.Save();
     }
-    public void SaveInventory(string chave, int id)
+    public void SaveInventory(string chave, string value)
     {
-        PlayerPrefs.SetInt(chave, id);
+        PlayerPrefs.SetString(chave, value);
         PlayerPrefs.Save();
     }
     void Awake()

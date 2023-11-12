@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject pauseMenu;
     public GameObject soundPanel;
-    
+    public GameObject NPCManagerMenu, upgradeManager;
+    public NPCManager NPCManager;
     public PlayerMovement playerMovement;
     public PlayerLogic playerLogic = null;
     public Inventory inventory;
@@ -20,7 +21,15 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-
+    public bool UseMoney(int amount)
+    {
+        if(money >= amount)
+        {
+            money -= amount;
+            return true;
+        }
+        return false;
+    }
     //Ui Manager
     public void SceneChange(string Scene)
     {
@@ -35,10 +44,13 @@ public class GameManager : MonoBehaviour
     {
         if (pauseMenu.activeSelf)
         {
-            if (playerLogic != null)
+            if (!upgradeManager.activeSelf && !NPCManagerMenu.activeSelf)
             {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
+                if (playerLogic != null)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
@@ -52,6 +64,54 @@ public class GameManager : MonoBehaviour
             }
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
+        }
+    }
+    public void NpcManager()
+    {
+        if (NPCManagerMenu.activeSelf)
+        {
+            if (!upgradeManager.activeSelf && !pauseMenu.activeSelf)
+            {
+                if (playerLogic != null)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+                NPCManagerMenu.SetActive(false);
+            }
+        }
+        else
+        {
+            if (playerLogic != null)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            NPCManagerMenu.SetActive(true);
+        }
+    }
+    public void UpgradeManager()
+    {
+        if (upgradeManager.activeSelf)
+        {
+            if(!NPCManagerMenu.activeSelf && !pauseMenu.activeSelf)
+            {
+                if (playerLogic != null)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+            }          
+            upgradeManager.SetActive(false);
+        }
+        else
+        {
+            if (playerLogic != null)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            upgradeManager.SetActive(true);
         }
     }
     public void EnableSound()

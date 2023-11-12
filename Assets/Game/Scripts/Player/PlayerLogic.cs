@@ -21,15 +21,19 @@ public class PlayerLogic : MonoBehaviour
     {
         if (Time.timeScale > 0)
         {
-            PauseMenu();
+            InputsMenu();
             TryHit();
         }
     }
-    public void PauseMenu()
+    public void InputsMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameManager.instance.PauseMenu();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            GameManager.instance.NpcManager();
         }
     }
     public void TryHit()
