@@ -36,17 +36,12 @@ public class NPCManager : MonoBehaviour
         //PlayerPrefs.DeleteAll();
         //SaveAll();
         StartFunction();
-        fuelSlider.value = fuel;
     }
     public void StartFunction()
     {
         LoadAll();
-        LoadValues();
-        for (int i = 0; i < 3; i++)
-        {
-            npcs[i].StartNPC(NPCSelectedJob[i]);
-            jobImage[i].sprite = jobs[NPCSelectedJob[i]];
-        }
+        GameManager.instance.inventory.LoadInventory();
+        GameManager.instance.inventory.ShowItems();
     }
     private void SaveAll()
     {
@@ -78,18 +73,6 @@ public class NPCManager : MonoBehaviour
         PlayerPrefs.SetInt("Money", GameManager.instance.money);
 
         PlayerPrefs.Save();
-    }
-    private void LoadValues()
-    {
-        GameManager.instance.UseMoney(0);
-        for(int i = 0; i < upgrades.Length; i++)
-        {
-            buttons[i].SetActive(upgrades[i]);
-        }
-        for(int i=0;i<valueTexts.Length; i++)
-        {
-            valueTexts[i].text = "$$ "+ value[i];
-        }
     }
     public void Upgrade(int which)
     {
@@ -140,23 +123,21 @@ public class NPCManager : MonoBehaviour
             SaveAll();
     }
     private void LoadAll()
-    {
-        for (int i = 0; i < NPCSelectedJob.Length; i++)
-        {
-            NPCSelectedJob[i] = PlayerPrefs.GetInt("jobs" + i);
-        }
+    {      
+        //JobsTime
+        jobTime = PlayerPrefs.GetInt("jobTime");
 
+        //Fuel
         fuel = PlayerPrefs.GetInt("fuel");
+        fuelSlider.value = fuel;
 
+        //FuelConsumption
         fuelConsumption = PlayerPrefs.GetInt("consumption");
 
-
-            jobTime = PlayerPrefs.GetInt("jobTime");
-
-
+        //Upgrades
         for (int i = 0; i < upgrades.Length; i++)
         {
-            if (PlayerPrefs.GetInt("upgrades") == 1)
+            if (PlayerPrefs.GetInt("upgrades" + i) == 1)
             {
                 upgrades[i] = true;
                 buttons[i].SetActive(true);
@@ -167,11 +148,35 @@ public class NPCManager : MonoBehaviour
             }
         }
 
-       GameManager.instance.money = PlayerPrefs.GetInt("Money");
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].SetActive(upgrades[i]);
+        }
+        for (int i = 0; i < valueTexts.Length; i++)
+        {
+            valueTexts[i].text = "$$ " + value[i];
+        }
+
+        //Money
+        GameManager.instance.money = PlayerPrefs.GetInt("Money");
+        GameManager.instance.UseMoney(0);
+
+        //Jobs
+        for (int i = 0; i < NPCSelectedJob.Length; i++)
+        {
+            NPCSelectedJob[i] = PlayerPrefs.GetInt("jobs" + i);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            npcs[i].StartNPC(NPCSelectedJob[i]);
+            jobImage[i].sprite = jobs[NPCSelectedJob[i]];
+        }
     }
     public void ClearData()
     {
         PlayerPrefs.DeleteAll();
+        SaveAll();
     }
     public bool UseFuel()
     {

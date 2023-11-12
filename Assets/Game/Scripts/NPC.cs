@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NPC : MonoBehaviour
 {
     public int job;
-    public float timeForMove = 2;
+    public float timeForMove;
     public NavMeshAgent ai;
     int tempJob;
     private void Start()

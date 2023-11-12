@@ -11,9 +11,7 @@ public class Inventory : MonoBehaviour
     
     private void Start()
     {
-        GameManager.instance.inventory = this;
-        LoadInventory();
-        ShowItems();
+        GameManager.instance.inventory = this;       
     }
     public bool AddItems(int id)
     {
