@@ -33,10 +33,20 @@ public class NPCManager : MonoBehaviour
     private void Start()
     {
         GameManager.instance.NPCManager = this;
-        PlayerPrefs.DeleteAll();
-        SaveAll();
+        //PlayerPrefs.DeleteAll();
+        //SaveAll();
         StartFunction();
         fuelSlider.value = fuel;
+    }
+    public void StartFunction()
+    {
+        LoadAll();
+        LoadValues();
+        for (int i = 0; i < 3; i++)
+        {
+            npcs[i].StartNPC(NPCSelectedJob[i]);
+            jobImage[i].sprite = jobs[NPCSelectedJob[i]];
+        }
     }
     private void SaveAll()
     {
@@ -65,10 +75,13 @@ public class NPCManager : MonoBehaviour
             }
         }
 
+        PlayerPrefs.SetInt("Money", GameManager.instance.money);
+
         PlayerPrefs.Save();
     }
     private void LoadValues()
     {
+        GameManager.instance.UseMoney(0);
         for(int i = 0; i < upgrades.Length; i++)
         {
             buttons[i].SetActive(upgrades[i]);
@@ -80,8 +93,8 @@ public class NPCManager : MonoBehaviour
     }
     public void Upgrade(int which)
     {
-        if(GameManager.instance.money >= value[which])
-        {
+        if (GameManager.instance.UseMoney(value[which]))
+        {          
             upgrades[which] = true;
             buttons[which].SetActive(upgrades[which]);
             switch (which)
@@ -146,27 +159,19 @@ public class NPCManager : MonoBehaviour
             if (PlayerPrefs.GetInt("upgrades") == 1)
             {
                 upgrades[i] = true;
-                
+                buttons[i].SetActive(true);
             }
             else
             {
                 upgrades[i] = false;
             }
         }
+
+       GameManager.instance.money = PlayerPrefs.GetInt("Money");
     }
     public void ClearData()
     {
         PlayerPrefs.DeleteAll();
-    }
-    public void StartFunction()
-    {
-        LoadAll();
-        LoadValues();
-        for (int i = 0; i < 3; i++)
-        {
-            npcs[i].StartNPC(NPCSelectedJob[i]);
-            jobImage[i].sprite = jobs[NPCSelectedJob[i]];
-        }
     }
     public bool UseFuel()
     {

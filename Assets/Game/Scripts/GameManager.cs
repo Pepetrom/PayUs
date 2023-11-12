@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public PlayerMovement playerMovement;
     public PlayerLogic playerLogic = null;
     public Inventory inventory;
+    public TextMeshProUGUI moneyText, moneyTextUpgradeMenu;
 
     public CameraShake cameraShake;
     public int money = 0;
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
         if(money >= amount)
         {
             money -= amount;
+            moneyText.text = $"$$ {money}";
+            moneyTextUpgradeMenu.text = $"$$ {money}";
             return true;
         }
         return false;
