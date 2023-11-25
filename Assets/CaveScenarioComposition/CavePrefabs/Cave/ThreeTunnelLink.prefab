@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2480996883557022579}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ThreeTunnelLink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1280542836477280070}
   - component: {fileID: 740973378252549780}
   - component: {fileID: 6188489153054999512}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 2167601112245722202}
   - component: {fileID: 3126267946399284920}
   - component: {fileID: 6774413148327009106}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
