@@ -282,6 +282,8 @@ MonoBehaviour:
   atackRange: 3
   canHit: 1
   missionMachinePanel: {fileID: 0}
+  particula: {fileID: 6635566172148485165, guid: d2be9afea432411478b268c984d17d58,
+    type: 3}
 --- !u!54 &6790768664934024052
 Rigidbody:
   m_ObjectHideFlags: 0

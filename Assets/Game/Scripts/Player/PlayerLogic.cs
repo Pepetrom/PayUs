@@ -12,6 +12,7 @@ public class PlayerLogic : MonoBehaviour
     Ray _ray;
     Camera _camera;
     public GameObject missionMachinePanel;
+    public GameObject particula;
     private void Start()
     {
         _camera = Camera.main;
@@ -79,7 +80,15 @@ public class PlayerLogic : MonoBehaviour
             if (_hit.collider.CompareTag("Breakable"))
             {
                 _hit.collider.GetComponent<Breakable>().TakeHit(1);
+                SpawnParticula(_hit.point);
             }
-        }   
+        }
+    }
+    private void SpawnParticula(Vector3 position)
+    {
+        if (particula != null)
+        {
+            Instantiate(particula, position, Quaternion.identity);
+        }
     }
 }
