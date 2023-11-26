@@ -63,6 +63,7 @@ public class MissionMachine : MonoBehaviour
             GameManager.instance.AddMoney(missionValue[0]);
             completed[0] = true;
             buttons[0].SetActive(false);
+            GameManager.instance.inventory.ShowItems();
         }
     }
     public void MissionTwo()
@@ -73,6 +74,7 @@ public class MissionMachine : MonoBehaviour
             GameManager.instance.AddMoney(missionValue[1]);
             completed[1] = true;
             buttons[1].SetActive(false);
+            GameManager.instance.inventory.ShowItems();
         }
     }
     public void MissionThree()
@@ -83,6 +85,7 @@ public class MissionMachine : MonoBehaviour
             GameManager.instance.AddMoney(missionValue[2]);
             completed[2] = true;
             buttons[2].SetActive(false);
+            GameManager.instance.inventory.ShowItems();
         }
         
     }
