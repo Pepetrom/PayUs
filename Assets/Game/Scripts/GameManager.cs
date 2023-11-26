@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public PlayerLogic playerLogic = null;
     public Inventory inventory;
     public TextMeshProUGUI moneyText, moneyTextUpgradeMenu;
-
     public CameraShake cameraShake;
     public int money = 0;
 

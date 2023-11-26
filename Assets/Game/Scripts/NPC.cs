@@ -61,7 +61,7 @@ public class NPC : MonoBehaviour
     {
         if(other.CompareTag("Player") && agressive)
         {
-            GameManager.instance.SceneChange("DefeatEaten");
+            GameManager.instance.SceneChange("Defeat");
         }
     }
 }

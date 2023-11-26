@@ -39,7 +39,7 @@ public class MissionMachine : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             missionValueText2[i].text = $"Pays: ${missionValue[i]}";
-            oreText2[i].text = $"{quantity[i]} {oreType[i]}";
+            oreText2[i].text = $"{quantity[i]} {oreNames[oreType[i]]}";
             buttons2[i].SetActive(!completed[i]);
         }
     }
