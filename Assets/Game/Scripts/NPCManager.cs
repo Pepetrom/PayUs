@@ -33,8 +33,8 @@ public class NPCManager : MonoBehaviour
     private void Start()
     {
         GameManager.instance.NPCManager = this;
-        //PlayerPrefs.DeleteAll();
-        //SaveAll();
+        PlayerPrefs.DeleteAll();
+        SaveAll();
         StartFunction();
     }
     public void StartFunction()
@@ -198,5 +198,14 @@ public class NPCManager : MonoBehaviour
         NPCSelectedJob[actual] = job;
         jobImage[actual].sprite = jobs[NPCSelectedJob[actual]];
         SaveAll();
+    }
+    public void BuyFood(int food)
+    {
+        if(GameManager.instance.UseMoney(food * 3))
+        {           
+           fuel += food;
+           fuelSlider.value = fuel;
+           GameManager.instance.playerMovement.RestoreHunger();
+        }
     }
 }

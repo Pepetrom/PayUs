@@ -81,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
             staminaTimer += Time.fixedDeltaTime;
         }
     }
+    public void RestoreHunger()
+    {
+        hungerSlider.value = 30;
+    }
     public void UseStamina(float quantity)
     {
         staminaSlider.AddValue(-quantity);
