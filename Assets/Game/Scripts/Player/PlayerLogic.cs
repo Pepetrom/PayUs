@@ -11,6 +11,7 @@ public class PlayerLogic : MonoBehaviour
     RaycastHit _hit;
     Ray _ray;
     Camera _camera;
+    public GameObject missionMachinePanel;
     private void Start()
     {
         _camera = Camera.main;
@@ -41,6 +42,11 @@ public class PlayerLogic : MonoBehaviour
         //Play animation
         if (Input.GetKey(KeyCode.Mouse0) && canHit)
         {
+            Raycast();
+            if (_hit.collider.CompareTag("Machine") && Vector3.Distance(transform.position, _hit.collider.transform.position) < 4)
+            {
+                GameManager.instance.MissionMachine();
+            }
             canHit = false;
             //animator.SetTrigger("Hit");
             GameManager.instance.playerMovement.UseStamina(0.1f);

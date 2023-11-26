@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject pauseMenu;
     public GameObject soundPanel;
+    public GameObject missionMachine;
     public GameObject NPCManagerMenu, upgradeManager;
     public NPCManager NPCManager;
     public PlayerMovement playerMovement;
@@ -33,6 +34,12 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        moneyText.text = $"$$ {money}";
+        moneyTextUpgradeMenu.text = $"$$ {money}";
     }
     //Ui Manager
     public void SceneChange(string Scene)
@@ -129,5 +136,28 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+    public void MissionMachine()
+    {
+        if (missionMachine.activeSelf)
+        {
+            missionMachine.SetActive(false);
+            Time.timeScale = 1;
+            if (!pauseMenu.activeSelf)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+        else
+        {
+            missionMachine.SetActive(true);
+            Time.timeScale = 0;
+            if (!pauseMenu.activeSelf)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
     }
 }
