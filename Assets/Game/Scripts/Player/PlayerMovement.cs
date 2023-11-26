@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         staminaTimer = 0;
         if(staminaSlider.value <= 0)
         {
-            SceneManager.LoadScene("Defeat");
+            SceneManager.LoadScene("DefeatHunger");
         }
     }
     public void Jump()

@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
         {
             inventory.SaveFullInventory();
         }
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(Scene);
     }
     public void PauseMenu()

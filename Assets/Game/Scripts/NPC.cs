@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     int tempJob;
     bool agressive = false;
     public GameObject AgressiveForm;
+    public GameObject ore, pickaxe;
     private void Start()
     {
         ai = GetComponent<NavMeshAgent>();       
@@ -26,14 +27,20 @@ public class NPC : MonoBehaviour
     }
     private IEnumerator DoJob()
     {
-        if(GameManager.instance.NPCManager.UseFuel())
+        ore.SetActive(false);
+        pickaxe.SetActive(false);
+        if (GameManager.instance.NPCManager.UseFuel())
         {
             AgressiveForm.SetActive(false);
             agressive = false;
+            ore.SetActive(false);
+            pickaxe.SetActive(true);
             ai.speed = 3.5f;
             tempJob = job;
             ai.SetDestination(GameManager.instance.NPCManager.holes[job].position);
             yield return new WaitForSeconds(timeForMove + GameManager.instance.NPCManager.jobTime);
+            pickaxe.SetActive(false);
+            ore.SetActive(true);
             ai.SetDestination(GameManager.instance.NPCManager.baseReturn.position);
             yield return new WaitForSeconds(timeForMove);
             GameManager.instance.inventory.AddItems(tempJob);
@@ -54,7 +61,7 @@ public class NPC : MonoBehaviour
     {
         if(other.CompareTag("Player") && agressive)
         {
-            GameManager.instance.SceneChange("Defeat");
+            GameManager.instance.SceneChange("DefeatEaten");
         }
     }
 }
