@@ -15,7 +15,11 @@ public class MissionMachine : MonoBehaviour
     int[] quantity = new int[3];
     bool[] completed = new bool[3];
     float timer;
-    public Slider timerSlider;
+    public Slider timerSlider, miniSlider;
+    //Mini Machine
+    public TextMeshProUGUI[] missionValueText2 = new TextMeshProUGUI[3];
+    public TextMeshProUGUI[] oreText2 = new TextMeshProUGUI[3];
+    public GameObject[] buttons2 = new GameObject[3];
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,16 @@ public class MissionMachine : MonoBehaviour
                 buttons[i].SetActive(true);
                 missionValueText[i].text = $"Pays: ${missionValue[i]}";
                 oreText[i].text = $"{quantity[i]} {oreNames[oreType[i]]}";
+        }
+        UpdateMiniMachine();
+    }
+    void UpdateMiniMachine()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            missionValueText2[i].text = $"Pays: ${missionValue[i]}";
+            oreText2[i].text = $"{quantity[i]} {oreType[i]}";
+            buttons2[i].SetActive(!completed[i]);
         }
     }
     void UpdateMissions()
@@ -43,12 +57,14 @@ public class MissionMachine : MonoBehaviour
                 oreText[i].text = $"{quantity[i]} {oreType[i]}";
             }
         }
+        UpdateMiniMachine();
     }
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
         timerSlider.value = timer;
+        miniSlider.value = timer;
         if (timer >= 30)
         {
             UpdateMissions();
