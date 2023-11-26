@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &195663620240705379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8169835361238515967}
+  m_Layer: 0
+  m_Name: GroundHerbageGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8169835361238515967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195663620240705379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 126011221188962775}
+  - {fileID: 7208392632176569407}
+  - {fileID: 3587218092461960258}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2893419744377154498
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8169835361238515967}
+    m_Modifications:
+    - target: {fileID: 5144790457404792135, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_Name
+      value: TrepadeiraPlantaB
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b, type: 3}
+--- !u!4 &7208392632176569407 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5489367899109771261, guid: a2d3bb9bbcc3e1a41ad5f3359d91047b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2893419744377154498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4313442078145041334
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8169835361238515967}
+    m_Modifications:
+    - target: {fileID: 99052539729814862, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_Name
+      value: TrepadeiraPlantaC
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4611141c53888cd4299ac3026b9acda3, type: 3}
+--- !u!4 &3587218092461960258 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 726266385734467572, guid: 4611141c53888cd4299ac3026b9acda3,
+    type: 3}
+  m_PrefabInstance: {fileID: 4313442078145041334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5656684614829226560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8169835361238515967}
+    m_Modifications:
+    - target: {fileID: 4932825374453008685, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_Name
+      value: TrepadeiraPlantaA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4, type: 3}
+--- !u!4 &126011221188962775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5710346789257630615, guid: 28f7f773ad4eaf44e99fdb5b0d5c5af4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5656684614829226560}
+  m_PrefabAsset: {fileID: 0}
