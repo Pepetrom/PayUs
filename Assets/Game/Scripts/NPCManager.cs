@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class NPCManager : MonoBehaviour
 {
@@ -20,22 +19,34 @@ public class NPCManager : MonoBehaviour
     public int fuelConsumption;
     public Slider fuelSlider;
     //Upgrades
-    public GameObject[] buttons = new GameObject[12];
+    //public GameObject[] buttons = new GameObject[12];
+    public Button[] buttons;
     public int[] value = new int[12];
     public TextMeshProUGUI[] valueTexts = new TextMeshProUGUI[12];
     public bool[] upgrades = new bool[12];
     public int[] itemMultiplier = new int[3];
     public int[] orevalue = new int[3];
-    public void Porta()
-    {
+    public GameObject[] doors = new GameObject[3];
 
+
+    public void Porta(GameObject door)
+    {
+        door.gameObject.SetActive(false);
+    }
+    public void DisableButton(Button upgrade)
+    {
+        upgrade.interactable = false;
+    }
+    public void EnableButton(Button upgrade)
+    {
+        upgrade.interactable = true;
     }
     private void Start()
     {
         GameManager.instance.NPCManager = this;
         PlayerPrefs.DeleteAll();
         SaveAll();
-        StartFunction();
+        LoadAll();
     }
     public void StartFunction()
     {
@@ -78,52 +89,73 @@ public class NPCManager : MonoBehaviour
     {
         if (GameManager.instance.UseMoney(value[which]))
         {          
-            upgrades[which] = true;
-            buttons[which].SetActive(upgrades[which]);
             switch (which)
             {
                 case 0:
-                    Porta();
+                    Porta(doors[0]);
+                    Porta(doors[1]);
+                    EnableButton(buttons[1]);
+                    EnableButton(buttons[2]);
                     break;
                 case 1:
-                    fuelConsumption = 2;
+                    orevalue[0] = 2;
+                    EnableButton(buttons[3]);
+                    DisableButton(buttons[2]);
                     break;
                 case 2:
-                    jobTime = 10;
+                    itemMultiplier[0] = 2;
+                    EnableButton(buttons[3]);
+                    DisableButton(buttons[1]);
                     break;
                 case 3:
-                    itemMultiplier[0] = 2;
+                    fuelConsumption = 2;                   
                     break;
+
                 case 4:
-                    Porta();
+                    Porta(doors[2]);
+                    EnableButton(buttons[5]);
+                    EnableButton(buttons[6]);
                     break;
                 case 5:
-                    fuel = 16;
+                    orevalue[1] = 6;
+                    EnableButton(buttons[7]);
+                    DisableButton(buttons[6]);
                     break;
-                case 6:
+                case 6:                  
                     itemMultiplier[1] = 2;
+                    EnableButton(buttons[7]);
+                    DisableButton(buttons[5]);
                     break;
                 case 7:
-                    orevalue[0] = 3;
+                    jobTime = 10;
                     break;
+
                 case 8:
-                    Porta();
+                    Porta(doors[3]);
+                    EnableButton(buttons[9]);
+                    EnableButton(buttons[10]);
                     break;
                 case 9:
-                    itemMultiplier[2] = 2;
+                    orevalue[2] = 9;
+                    EnableButton(buttons[11]);
+                    DisableButton(buttons[10]);
                     break;
                 case 10:
-                    orevalue[1] = 6;
+                    itemMultiplier[2] = 2;
+                    EnableButton(buttons[11]);
+                    DisableButton(buttons[9]);
                     break;
-                case 11:
-                    orevalue[2] = 9;
+                case 11:                   
+                    fuel = 16;
                     break;
             }
+            DisableButton(buttons[which]);
         }
-            SaveAll();
+            //SaveAll();
     }
     private void LoadAll()
     {      
+        /*
         //JobsTime
         jobTime = PlayerPrefs.GetInt("jobTime");
 
@@ -133,8 +165,9 @@ public class NPCManager : MonoBehaviour
 
         //FuelConsumption
         fuelConsumption = PlayerPrefs.GetInt("consumption");
-
+        
         //Upgrades
+
         for (int i = 0; i < upgrades.Length; i++)
         {
             if (PlayerPrefs.GetInt("upgrades" + i) == 1)
@@ -147,26 +180,27 @@ public class NPCManager : MonoBehaviour
                 upgrades[i] = false;
             }
         }
-
+        
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].SetActive(upgrades[i]);
         }
+        */
         for (int i = 0; i < valueTexts.Length; i++)
         {
             valueTexts[i].text = "$$ " + value[i];
         }
 
         //Money
-        GameManager.instance.money = PlayerPrefs.GetInt("Money");
+        //GameManager.instance.money = PlayerPrefs.GetInt("Money");
         GameManager.instance.UseMoney(0);
-
+        /*
         //Jobs
         for (int i = 0; i < NPCSelectedJob.Length; i++)
         {
             NPCSelectedJob[i] = PlayerPrefs.GetInt("jobs" + i);
         }
-
+        */
         for (int i = 0; i < 3; i++)
         {
             npcs[i].StartNPC(NPCSelectedJob[i]);

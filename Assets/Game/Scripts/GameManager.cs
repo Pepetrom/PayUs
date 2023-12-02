@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI moneyText, moneyTextUpgradeMenu;
     public CameraShake cameraShake;
     public int money = 0;
-
+    public int openMenuCount = 0;
     private void Awake()
     {
         instance = this;
     }
     public bool UseMoney(int amount)
     {
-        if(money >= amount)
+        if (money >= amount)
         {
             money -= amount;
             moneyText.text = $"$$ {money}";
@@ -52,20 +52,16 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(Scene);
     }
-    public void PauseMenu()
+    public void MenuCounter(int i)
     {
-        if (pauseMenu.activeSelf)
+        openMenuCount += i;
+        if(openMenuCount <= 0)
         {
-            if (!upgradeManager.activeSelf && !NPCManagerMenu.activeSelf)
+            if (playerLogic != null)
             {
-                if (playerLogic != null)
-                {
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
             }
-            Time.timeScale = 1;
-            pauseMenu.SetActive(false);
         }
         else
         {
@@ -74,6 +70,19 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
+        }
+    }
+    public void PauseMenu()
+    {
+        if (pauseMenu.activeSelf)
+        {            
+            MenuCounter(-1);
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            MenuCounter(1);
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
         }
@@ -82,23 +91,12 @@ public class GameManager : MonoBehaviour
     {
         if (NPCManagerMenu.activeSelf)
         {
-            if (!upgradeManager.activeSelf && !pauseMenu.activeSelf)
-            {
-                if (playerLogic != null)
-                {
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-                NPCManagerMenu.SetActive(false);
-            }
+            MenuCounter(-1);
+            NPCManagerMenu.SetActive(false);
         }
         else
         {
-            if (playerLogic != null)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
+            MenuCounter(1);
             NPCManagerMenu.SetActive(true);
         }
     }
@@ -106,23 +104,12 @@ public class GameManager : MonoBehaviour
     {
         if (upgradeManager.activeSelf)
         {
-            if(!NPCManagerMenu.activeSelf && !pauseMenu.activeSelf)
-            {
-                if (playerLogic != null)
-                {
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-            }          
+            MenuCounter(-1);
             upgradeManager.SetActive(false);
         }
         else
         {
-            if (playerLogic != null)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
+            MenuCounter(1);
             upgradeManager.SetActive(true);
         }
     }
@@ -142,23 +129,13 @@ public class GameManager : MonoBehaviour
     {
         if (missionMachine.activeSelf)
         {
+            MenuCounter(-1);
             missionMachine.SetActive(false);
-            Time.timeScale = 1;
-            if (!pauseMenu.activeSelf)
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
         }
         else
         {
+            MenuCounter(1);
             missionMachine.SetActive(true);
-            Time.timeScale = 0;
-            if (!pauseMenu.activeSelf)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
         }
     }
 }
