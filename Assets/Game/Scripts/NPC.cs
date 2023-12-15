@@ -33,6 +33,7 @@ public class NPC : MonoBehaviour
         //Ficar Calmo
         if (GameManager.instance.nPCManager.UseFuel())
         {
+            AudioManager.Instance.PlayMusic("CalmSong");
             AgressiveForm.SetActive(false);
             agressive = false;
             ore.SetActive(false);
@@ -51,6 +52,7 @@ public class NPC : MonoBehaviour
         else
         //Ficar Agressivo
         {
+            AudioManager.Instance.PlayMusic("AngrySong");
             AgressiveForm.SetActive(true);
             agressive = true;
             ai.speed = 7;
