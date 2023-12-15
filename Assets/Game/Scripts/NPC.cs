@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     bool agressive = false;
     public GameObject AgressiveForm;
     public GameObject ore, pickaxe;
+
     private void Start()
     {
         ai = GetComponent<NavMeshAgent>();       

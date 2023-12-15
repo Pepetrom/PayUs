@@ -2365,7 +2365,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -50596,19 +50596,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music:
-  - name: CaveBackground
-    clip: {fileID: 8300000, guid: b2ea947338852124d879217b73e22a56, type: 3}
+  - name: CalmSong
+    clip: {fileID: 8300000, guid: ec6e34148f9699141bc30014cf6b8977, type: 3}
+    volume: 1
+  - name: AngrySong
+    clip: {fileID: 8300000, guid: 140ad0fded00b0f4996fc1ef4ccc3fa0, type: 3}
+    volume: 1
   sfx:
   - name: Hit
     clip: {fileID: 8300000, guid: 664474e8976d2a04095dcc3470bccc25, type: 3}
+    volume: 1
   - name: Destruction
     clip: {fileID: 8300000, guid: 8f0023d0853060949a932a93cc3b3ad9, type: 3}
+    volume: 0.8
   - name: SingleFootstep
     clip: {fileID: 8300000, guid: c8aa2bb8f28b96a4d8c152001f9981d3, type: 3}
+    volume: 0.1
   - name: RunningBreath
     clip: {fileID: 8300000, guid: 42bd799dae87e204681dbef9a3b09ac9, type: 3}
+    volume: 0.1
   - name: Power
     clip: {fileID: 8300000, guid: 44b2f34bdd7dca64899b57e9fdd5edbb, type: 3}
+    volume: 0.5
+  - name: HeartBeat
+    clip: {fileID: 8300000, guid: ee1ac94a4272785408422a0d213958cd, type: 3}
+    volume: 0.5
+  - name: CaveBackground
+    clip: {fileID: 8300000, guid: b2ea947338852124d879217b73e22a56, type: 3}
+    volume: 0.5
   musicSource: {fileID: 1885082268}
   sfxSource: {fileID: 78302814}
 --- !u!4 &1613387593
@@ -58769,7 +58784,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0

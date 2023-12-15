@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
 
     public Sounds[] music, sfx;
     public AudioSource musicSource, sfxSource;
+    private bool isplayingBackgorund = false;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic("CaveBackground");
+        PlayBackgroundSFX();
     }
 
     public void PlayMusic(string name)
@@ -84,5 +85,17 @@ public class AudioManager : MonoBehaviour
     public void SfxVolume(float volume)
     {
         sfxSource.volume = volume;
+    }
+
+    private void PlayBackgroundSFX()
+    {
+        PlaySfx("CaveBackground");
+        isplayingBackgorund = true;
+        StartCoroutine(WaitForSoundEnd());
+    }
+    private IEnumerator WaitForSoundEnd()
+    {
+        yield return new WaitForSeconds(AudioManager.Instance.GetSfxClipLength("SingleFootstep"));
+        isplayingBackgorund = false;
     }
 }

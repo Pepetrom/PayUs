@@ -591,6 +591,8 @@ MonoBehaviour:
   AgressiveForm: {fileID: 2446269646371408075}
   ore: {fileID: 6036025248953598796}
   pickaxe: {fileID: 8415874814933938007}
+  angry: {fileID: 0}
+  calm: {fileID: 0}
 --- !u!65 &9142790524706873864
 BoxCollider:
   m_ObjectHideFlags: 0
