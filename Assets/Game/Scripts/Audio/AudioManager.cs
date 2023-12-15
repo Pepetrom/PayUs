@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -23,19 +23,22 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     private void Start()
     {
-        PlayMusic("CaveAmbience");
+        PlayMusic("CaveBackground");
     }
+
     public void PlayMusic(string name)
     {
-        Sounds soundIwant = Array.Find(music,x=>x.name == name);
-        if(soundIwant != null)
+        Sounds soundIwant = Array.Find(music, x => x.name == name);
+        if (soundIwant != null)
         {
             musicSource.clip = soundIwant.clip;
             musicSource.Play();
         }
     }
+
     public void PlaySfx(string name)
     {
         Sounds soundIwant = Array.Find(sfx, x => x.name == name);
@@ -44,18 +47,40 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(soundIwant.clip);
         }
     }
+    public void PlaySfxSpeedUp(string name, float pitch = 1.0f)
+    {
+        Sounds soundIwant = Array.Find(sfx, x => x.name == name);
+        if (soundIwant != null)
+        {
+            sfxSource.pitch = pitch;
+            sfxSource.PlayOneShot(soundIwant.clip);
+            // Reset pitch to 1.0 after playing the sound
+            //sfxSource.pitch = 1.0f;
+        }
+    }
+
+
+    public float GetSfxClipLength(string name)
+    {
+        Sounds soundIwant = Array.Find(sfx, x => x.name == name);
+        return soundIwant != null ? soundIwant.clip.length : 0f;
+    }
+
     public void ToggleMusic()
     {
         musicSource.mute = !musicSource.mute;
     }
+
     public void ToggleSfx()
     {
         sfxSource.mute = !sfxSource.mute;
     }
+
     public void MusicVolume(float volume)
     {
         musicSource.volume = volume;
     }
+
     public void SfxVolume(float volume)
     {
         sfxSource.volume = volume;

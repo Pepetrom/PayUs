@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     float moveVertical;
     [SerializeField] float sprintMultiplier;
     Vector3 moveDirection;
+    private bool isFootstepPlaying = false;
+    private bool isRunningPlaying = false;
     //Camera
     public float sensitivity = 2.0f;
     float mouseX;
@@ -56,15 +58,38 @@ public class PlayerMovement : MonoBehaviour
         moveVertical = Input.GetAxis("Vertical");
         moveDirection = transform.forward * moveVertical + transform.right * moveHorizontal;
 
+        if (moveDirection.magnitude > 0.1f && !isFootstepPlaying && isGrounded)
+        {
+            AudioManager.Instance.PlaySfx("SingleFootstep");
+            isFootstepPlaying = true;
+            StartCoroutine(WaitForFootstepEnd());
+        }
+
         if (Input.GetButton("Sprint") && isGrounded && staminaSlider.value > 0)
         {
             rb.MovePosition(transform.position + (moveDirection * moveSpeed * sprintMultiplier * Time.fixedDeltaTime));
             UseStamina(Time.fixedDeltaTime);
+            if (moveDirection.magnitude > 0.1f && !isRunningPlaying && isGrounded)
+            {
+                AudioManager.Instance.PlaySfx("RunningBreath");
+                isRunningPlaying = true;
+                StartCoroutine(WaitForBreathEnd());
+            }
         }
         else
         {
             rb.MovePosition(transform.position + (moveDirection * moveSpeed * Time.fixedDeltaTime));     
         }
+    }
+    private IEnumerator WaitForFootstepEnd()
+    {
+        yield return new WaitForSeconds(AudioManager.Instance.GetSfxClipLength("SingleFootstep"));
+        isFootstepPlaying = false;
+    }
+    private IEnumerator WaitForBreathEnd()
+    {
+        yield return new WaitForSeconds(AudioManager.Instance.GetSfxClipLength("RunningBreath"));
+        isRunningPlaying = false;
     }
     public void RecoverStamina()
     {

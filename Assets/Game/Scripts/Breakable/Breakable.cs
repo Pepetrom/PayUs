@@ -9,11 +9,11 @@ public class Breakable : MonoBehaviour
     public void TakeHit(float damage)
     {
         life -= damage;
-        //AudioManager.Instance.PlaySfx("Hit");
+        AudioManager.Instance.PlaySfx("Hit");
         if(life <= 0)
         {
             Die();
-            //AudioManager.Instance.PlaySfx("Destruction");
+            AudioManager.Instance.PlaySfx("Destruction");
         }
     }
     public void Die()

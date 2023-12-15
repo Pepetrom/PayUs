@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < whateverNeedsToBeTurnedOn.Length; i++)
             {
                 whateverNeedsToBeTurnedOn[i].SetActive(true);
+                AudioManager.Instance.PlaySfx("Power");
             }
             turnOnPanel.SetActive(false);
             hasStarted = true;         
