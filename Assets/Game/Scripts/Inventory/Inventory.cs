@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     }
     public bool AddItems(int id)
     {
-        itemQuantity[id] += GameManager.instance.NPCManager.itemMultiplier[id];
+        itemQuantity[id] += GameManager.instance.nPCManager.itemMultiplier[id];
         ShowItems();
         SaveFullInventory();
         return true;

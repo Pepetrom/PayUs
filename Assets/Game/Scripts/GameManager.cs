@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject soundPanel;
     public GameObject missionMachine;
     public GameObject NPCManagerMenu, upgradeManager;
-    public NPCManager NPCManager;
+    public NPCManager nPCManager;
     public PlayerMovement playerMovement;
     public PlayerLogic playerLogic = null;
     public Inventory inventory;
@@ -19,9 +19,43 @@ public class GameManager : MonoBehaviour
     public CameraShake cameraShake;
     public int money = 0;
     public int openMenuCount = 0;
+
+    public bool hasStarted;
+    public GameObject[] whateverNeedsToBeTurnedOn;
+    public GameObject turnOnPanel;
+    public GameObject[] NpcMenus;
+    public void StartAll()
+    {
+        if (!hasStarted)
+        {
+            playerLogic.turnOnPowerTip.SetActive(false);
+            for (int i = 0; i < whateverNeedsToBeTurnedOn.Length; i++)
+            {
+                whateverNeedsToBeTurnedOn[i].SetActive(true);
+            }
+            turnOnPanel.SetActive(false);
+            hasStarted = true;         
+        }      
+    }
+    public void StartTab()
+    {
+        playerLogic.openMenuTip.SetActive(true);
+        nPCManager.LoadAll();
+    }
+    public void StartNpc()
+    {
+        nPCManager.StartNpcs();
+    }
     private void Awake()
     {
         instance = this;
+        if (whateverNeedsToBeTurnedOn != null)
+        {
+        for (int i = 0; i < whateverNeedsToBeTurnedOn.Length; i++)
+        {
+            whateverNeedsToBeTurnedOn[i].SetActive(false);
+        }
+        }
     }
     public bool UseMoney(int amount)
     {

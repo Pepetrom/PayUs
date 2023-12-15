@@ -12,6 +12,7 @@ TagManager:
   - Center
   - Door
   - Machine
+  - Generator
   layers:
   - Default
   - TransparentFX

@@ -70,10 +70,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if(staminaTimer >= staminaCooldown)
         {
-            if (staminaSlider.value < staminaSlider.maxValue && hungerSlider.value > 0)
+            if (staminaSlider.value < staminaSlider.maxValue)
             {
                 staminaSlider.RemoveValue(Time.fixedDeltaTime);
-                hungerSlider.value -= Time.deltaTime;
             }
         }
         else
@@ -81,18 +80,10 @@ public class PlayerMovement : MonoBehaviour
             staminaTimer += Time.fixedDeltaTime;
         }
     }
-    public void RestoreHunger()
-    {
-        hungerSlider.value = 30;
-    }
     public void UseStamina(float quantity)
     {
         staminaSlider.AddValue(-quantity);
         staminaTimer = 0;
-        if(staminaSlider.value <= 0)
-        {
-            SceneManager.LoadScene("Defeat");
-        }
     }
     public void Jump()
     {

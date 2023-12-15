@@ -15,8 +15,8 @@ public class NPCManager : MonoBehaviour
     public int jobTime;
     public Transform[] holes = new Transform[3];
     public Transform baseReturn;
-    public int fuel;
-    public int fuelConsumption;
+    public float fuel;
+    public float fuelConsumption;
     public Slider fuelSlider;
     //Upgrades
     //public GameObject[] buttons = new GameObject[12];
@@ -28,6 +28,9 @@ public class NPCManager : MonoBehaviour
     public int[] orevalue = new int[3];
     public GameObject[] doors = new GameObject[3];
 
+    public bool firstFoodBuy = true;
+    public GameObject[] upgradeButton;
+    public GameObject[] npcfaces;
 
     public void Porta(GameObject door)
     {
@@ -43,10 +46,10 @@ public class NPCManager : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.instance.NPCManager = this;
+        GameManager.instance.nPCManager = this;
         PlayerPrefs.DeleteAll();
         SaveAll();
-        LoadAll();
+       // LoadAll();
     }
     public void StartFunction()
     {
@@ -61,9 +64,9 @@ public class NPCManager : MonoBehaviour
             PlayerPrefs.SetInt("jobs"+ i, NPCSelectedJob[i]);
         }
 
-        PlayerPrefs.SetInt("fuel", fuel);
+        PlayerPrefs.SetFloat("fuel", fuel);
 
-        PlayerPrefs.SetInt("consumption", fuelConsumption);
+        PlayerPrefs.SetFloat("consumption", fuelConsumption);
 
 
             PlayerPrefs.SetInt("jobTime", jobTime);
@@ -93,9 +96,19 @@ public class NPCManager : MonoBehaviour
             {
                 case 0:
                     Porta(doors[0]);
-                    Porta(doors[1]);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        npcs[i].StartNPC(NPCSelectedJob[i]);
+                        jobImage[i].sprite = jobs[NPCSelectedJob[i]];
+                    }
+                    for (int i = 0; i < npcfaces.Length; i++)
+                    {
+                        npcfaces[i].SetActive(true);
+                    }
                     EnableButton(buttons[1]);
                     EnableButton(buttons[2]);
+                    EnableButton(buttons[4]);
+                    EnableButton(buttons[8]);
                     break;
                 case 1:
                     orevalue[0] = 2;
@@ -108,11 +121,11 @@ public class NPCManager : MonoBehaviour
                     DisableButton(buttons[1]);
                     break;
                 case 3:
-                    fuelConsumption = 2;                   
+                    fuelConsumption = 0.5f;                   
                     break;
 
                 case 4:
-                    Porta(doors[2]);
+                    Porta(doors[1]);                   
                     EnableButton(buttons[5]);
                     EnableButton(buttons[6]);
                     break;
@@ -131,6 +144,7 @@ public class NPCManager : MonoBehaviour
                     break;
 
                 case 8:
+                    Porta(doors[2]);
                     Porta(doors[3]);
                     EnableButton(buttons[9]);
                     EnableButton(buttons[10]);
@@ -153,7 +167,7 @@ public class NPCManager : MonoBehaviour
         }
             //SaveAll();
     }
-    private void LoadAll()
+    public void LoadAll()
     {      
         /*
         //JobsTime
@@ -201,11 +215,15 @@ public class NPCManager : MonoBehaviour
             NPCSelectedJob[i] = PlayerPrefs.GetInt("jobs" + i);
         }
         */
-        for (int i = 0; i < 3; i++)
+        
+    }
+    public void StartNpcs()
+    {       
+        for(int i = 0; i < upgradeButton.Length; i++)
         {
-            npcs[i].StartNPC(NPCSelectedJob[i]);
-            jobImage[i].sprite = jobs[NPCSelectedJob[i]];
+            upgradeButton[i].SetActive(true);
         }
+        
     }
     public void ClearData()
     {
@@ -235,11 +253,18 @@ public class NPCManager : MonoBehaviour
     }
     public void BuyFood(int food)
     {
-        if(GameManager.instance.UseMoney(food * 3))
-        {           
-           fuel += food;
-           fuelSlider.value = fuel;
-           GameManager.instance.playerMovement.RestoreHunger();
-        }
+        if(fuel < 10)
+        {
+            if (GameManager.instance.UseMoney(food * 3))
+            {
+                if (firstFoodBuy)
+                {
+                    firstFoodBuy = false;
+                    StartNpcs();
+                }
+                fuel = 10;
+                fuelSlider.value = fuel;
+            }
+        }      
     }
 }

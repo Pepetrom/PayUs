@@ -13,6 +13,12 @@ public class PlayerLogic : MonoBehaviour
     Camera _camera;
     public GameObject missionMachinePanel;
     public GameObject particula;
+
+    public Animator pickaxeAnimator;
+    public bool hasPickaxe = false;
+    public bool openedNpcManager = false, hasTablet = false;
+    public GameObject pickaxe;
+    public GameObject openMenuTip, breakOresTip, turnOnPowerTip;
     private void Start()
     {
         _camera = Camera.main;
@@ -33,27 +39,49 @@ public class PlayerLogic : MonoBehaviour
         {
             GameManager.instance.PauseMenu();
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && GameManager.instance.hasStarted && hasPickaxe && hasTablet)
         {
+            if (!openedNpcManager)
+            {
+                openedNpcManager = true;
+                openMenuTip.SetActive(false);
+            }
             GameManager.instance.NpcManager();
         }
     }
     public void TryHit()
     {
-        //Play animation
-        if (Input.GetKey(KeyCode.Mouse0) && canHit)
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            if (canHit && hasPickaxe)
+            {
+                Raycast();
+                if (Vector3.Distance(transform.position, _hit.collider.transform.position) < 4)
+                {
+                    canHit = false;
+                    GameManager.instance.playerMovement.UseStamina(0.1f);
+                    pickaxeAnimator.SetTrigger("Hit");
+                    HitObject();
+                    StartCoroutine(Hit());
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !missionMachinePanel.activeSelf)
         {
             Raycast();
-            if (_hit.collider.CompareTag("Machine") && Vector3.Distance(transform.position, _hit.collider.transform.position) < 4)
+            if (Vector3.Distance(transform.position, _hit.collider.transform.position) < 3)
             {
-                GameManager.instance.MissionMachine();
+                if (_hit.collider.CompareTag("Machine") && GameManager.instance.hasStarted)
+                {
+                    GameManager.instance.MissionMachine();
+                }
+                if (_hit.collider.CompareTag("Machine") && !GameManager.instance.hasStarted)
+                {
+                    GameManager.instance.StartAll();
+                }
             }
-            canHit = false;
-            //animator.SetTrigger("Hit");
-            GameManager.instance.playerMovement.UseStamina(0.1f);
-            HitObject();
-            StartCoroutine(Hit());
         }
+
     }
     IEnumerator Hit()
     {
@@ -78,17 +106,16 @@ public class PlayerLogic : MonoBehaviour
         if (Raycast())
         {
             if (_hit.collider.CompareTag("Breakable"))
-            {
+            {             
                 _hit.collider.GetComponent<Breakable>().TakeHit(1);
-                SpawnParticula(_hit.point);
             }
         }
     }
-    private void SpawnParticula(Vector3 position)
+    public void SpawnParticula()
     {
         if (particula != null)
         {
-            Instantiate(particula, position, Quaternion.identity);
+            Instantiate(particula, _hit.point, Quaternion.identity);
         }
     }
 }

@@ -29,7 +29,8 @@ public class NPC : MonoBehaviour
     {
         ore.SetActive(false);
         pickaxe.SetActive(false);
-        if (GameManager.instance.NPCManager.UseFuel())
+        //Ficar Calmo
+        if (GameManager.instance.nPCManager.UseFuel())
         {
             AgressiveForm.SetActive(false);
             agressive = false;
@@ -37,16 +38,17 @@ public class NPC : MonoBehaviour
             pickaxe.SetActive(true);
             ai.speed = 3.5f;
             tempJob = job;
-            ai.SetDestination(GameManager.instance.NPCManager.holes[job].position);
-            yield return new WaitForSeconds(timeForMove + GameManager.instance.NPCManager.jobTime);
+            ai.SetDestination(GameManager.instance.nPCManager.holes[job].position);
+            yield return new WaitForSeconds(timeForMove + GameManager.instance.nPCManager.jobTime);
             pickaxe.SetActive(false);
             ore.SetActive(true);
-            ai.SetDestination(GameManager.instance.NPCManager.baseReturn.position);
+            ai.SetDestination(GameManager.instance.nPCManager.baseReturn.position);
             yield return new WaitForSeconds(timeForMove);
             GameManager.instance.inventory.AddItems(tempJob);
             StartCoroutine(DoJob());
         }
         else
+        //Ficar Agressivo
         {
             AgressiveForm.SetActive(true);
             agressive = true;

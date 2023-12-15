@@ -21,6 +21,10 @@ public class CircularSlider : MonoBehaviour
         {
             hurt.color = new Color(hurt.color.r, hurt.color.g, hurt.color.b, Mathf.Clamp((1 - (this.value * 0.33f)) / 1, 0, 0.1f));
         }
+        else
+        {
+            hurt.color = new Color(hurt.color.r, hurt.color.g, hurt.color.b, 0);
+        }
     }
     public void RemoveValue(float value)
     {
@@ -29,6 +33,10 @@ public class CircularSlider : MonoBehaviour
         if (this.value < 1)
         {
             hurt.color = new Color(hurt.color.r, hurt.color.g, hurt.color.b, Mathf.Clamp((1 - (this.value * 0.33f)) / 1, 0, 0.1f));
+        }
+        else
+        {
+            hurt.color = new Color(hurt.color.r, hurt.color.g, hurt.color.b, 0);
         }
     }
 }

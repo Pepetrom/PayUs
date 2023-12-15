@@ -27,7 +27,7 @@ public class MissionMachine : MonoBehaviour
         {
                 quantity[i] = Random.Range(1, 11);
                 oreType[i] = Random.Range(0, 3);
-                missionValue[i] = quantity[i] * GameManager.instance.NPCManager.orevalue[i];
+                missionValue[i] = quantity[i] * GameManager.instance.nPCManager.orevalue[i];
                 buttons[i].SetActive(true);
                 missionValueText[i].text = $"Pays: ${missionValue[i]}";
                 oreText[i].text = $"{quantity[i]} {oreNames[oreType[i]]}";
@@ -51,7 +51,7 @@ public class MissionMachine : MonoBehaviour
             {
                 quantity[i] = Random.Range(1,11);
                 oreType[i] = Random.Range(0, 3);
-                missionValue[i] = quantity[i] * GameManager.instance.NPCManager.orevalue[i];
+                missionValue[i] = quantity[i] * GameManager.instance.nPCManager.orevalue[i];
                 buttons[i].SetActive(true);
                 missionValueText[i].text = $"Pays: ${missionValue[i]}";
                 oreText[i].text = $"{quantity[i]} {oreType[i]}";
